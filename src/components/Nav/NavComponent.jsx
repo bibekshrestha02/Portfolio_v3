@@ -7,10 +7,11 @@ import { BiCube, BiBookAlt, BiMessageRoundedDots } from 'react-icons/bi';
 import { FaProjectDiagram } from 'react-icons/fa';
 import SocialLinksComponent from './component/SocialLinksComponent';
 import ImageComponent from './component/ImageComponent';
+import AdminDetailsComponent from './component/AdminDetailsComponent';
 import { FiMenu } from 'react-icons/fi';
 export default function NavComponent() {
-  const { primary, navText } = useSelector((state) => state.colors);
-  const { name, title } = useSelector((state) => state.admin);
+  const colors = useSelector((state) => state.colors);
+  const { name, title, isAdmin } = useSelector((state) => state.admin);
   const [isNavToogle, setNavToogle] = useState(false);
   const links = [
     {
@@ -57,33 +58,45 @@ export default function NavComponent() {
     },
   ];
   const navContainerStyle = {
-    backgroundColor: primary,
-    color: navText,
+    backgroundColor: colors.primary,
+    color: colors.navText,
   };
   let linksContainer = (
     <>
-      <LinksComponent links={links} />
-      <SocialLinksComponent socialLinks={socialLinks} />
+      <LinksComponent links={links} colors={colors} />
+      <SocialLinksComponent
+        socialLinks={socialLinks}
+        isAdmin={isAdmin}
+        colors={colors}
+      />
     </>
   );
   return (
     <div className={style.navMainContainer}>
       <div className={style.navContainer} style={navContainerStyle}>
-        <ImageComponent image='./profile.jpg' />
-        <div className={style.adminDetails}>
-          <span>{name}</span>
-          <span>{title}</span>
-        </div>
+        <ImageComponent
+          colors={colors}
+          image='./profile.jpg'
+          isAdmin={isAdmin}
+        />
+        <AdminDetailsComponent
+          colors={colors}
+          name={name}
+          title={title}
+          isAdmin={isAdmin}
+        />
         <div className={style.links}>{linksContainer}</div>
         <FiMenu
-          color={navText}
+          color={colors.navText}
           size={20}
           className={style.menuToogle}
           onClick={() => setNavToogle((e) => !e)}
         />
       </div>
       {isNavToogle && (
-        <div className={style.minLinks} style={{ backgroundColor: primary }}>
+        <div
+          className={style.minLinks}
+          style={{ backgroundColor: colors.primary }}>
           {linksContainer}
         </div>
       )}
