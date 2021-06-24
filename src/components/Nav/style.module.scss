@@ -1,0 +1,120 @@
+@import '../../sass/mixin';
+.navMainContainer {
+  @media screen and (max-width: $tabWidth) {
+    display: flex;
+    flex-direction: column;
+  }
+}
+.navContainer {
+  display: grid;
+  height: 100%;
+  .adminDetails {
+    span {
+      display: block;
+      text-align: center;
+      letter-spacing: 3px;
+      font-size: 20px;
+    }
+    :nth-child(1) {
+      font-weight: bold;
+      font-size: 24px;
+    }
+    @media screen and (max-width: $tabWidth) {
+      span {
+        letter-spacing: 1px;
+        text-align: center;
+        font-size: 14px;
+      }
+      :nth-child(1) {
+        font-size: 18px;
+      }
+    }
+  }
+  .imageContainer {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+    overflow: hidden;
+    .image {
+      background-color: white;
+      border-radius: 200px;
+      object-fit: contain;
+      width: 200px;
+      height: 200px;
+    }
+    @media screen and (max-width: $tabWidth) {
+      .image {
+        border-radius: 200px;
+        width: 50px;
+        height: 50px;
+      }
+    }
+  }
+  // links on main nav Component
+  .links {
+    @media screen and (max-width: $tabWidth) {
+      display: none;
+    }
+  }
+  .menuToogle {
+    width: 100%;
+    display: none;
+    cursor: pointer;
+    @media screen and (max-width: $tabWidth) {
+      display: block;
+    }
+  }
+  @media screen and (max-width: $tabWidth) {
+    grid-template-columns: 17% 1fr 10%;
+    align-items: center;
+    height: 90px;
+  }
+}
+.minLinks {
+  display: none;
+  @media screen and (max-width: $tabWidth) {
+    padding-bottom: 10px;
+    display: block;
+    z-index: 1;
+  }
+}
+.linkContainer {
+  width: 100%;
+  height: 50px;
+  line-height: 50px;
+  letter-spacing: 2px;
+  font-size: 20px;
+  text-decoration: none;
+  padding-left: 10px;
+  display: inline-block;
+  @media screen and (max-width: $tabWidth) {
+    width: 100%;
+    height: 40px;
+    line-height: 40px;
+    letter-spacing: 1px;
+    font-size: 18px;
+    text-decoration: none;
+    padding-left: 10px;
+    display: inline-block;
+  }
+}
+.socialLinksContainer {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+
+  .iconContainer {
+    width: 20px;
+    height: 20px;
+    overflow: hidden;
+    cursor: pointer;
+    margin-left: 10px;
+    img {
+      width: 100%;
+      height: 100%;
+    }
+  }
+}
