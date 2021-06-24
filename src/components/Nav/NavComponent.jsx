@@ -62,14 +62,14 @@ export default function NavComponent() {
     color: colors.navText,
   };
   let linksContainer = (
-    <>
+    <div className={style.linkWraper}>
       <LinksComponent links={links} colors={colors} />
       <SocialLinksComponent
         socialLinks={socialLinks}
         isAdmin={isAdmin}
         colors={colors}
       />
-    </>
+    </div>
   );
   return (
     <div className={style.navMainContainer}>

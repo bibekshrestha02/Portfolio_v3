@@ -4,7 +4,12 @@ import { IoMdColorPalette } from 'react-icons/io';
 export default function ImageComponent({ image, isAdmin, colors }) {
   return (
     <div className={style.imageContainer}>
-      <img src={image} alt='profile' className={style.image} />
+      <img
+        src={image}
+        alt='profile'
+        className={style.image}
+        style={{ border: `5px solid ${colors.navText}` }}
+      />
       {isAdmin && (
         <span style={{ color: colors.navText }}>Change Profile Path</span>
       )}

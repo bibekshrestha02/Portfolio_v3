@@ -2,11 +2,15 @@
 .mainTempleteContainer {
   height: 100vh;
   box-sizing: border-box;
-  padding: 44.5px 140px;
+  padding: 44.5px 80px;
   .bodyContainer {
     height: 100%;
+    overflow: scroll;
     display: grid;
     grid-template-columns: 30% 70%;
+    &::-webkit-scrollbar {
+      display: none;
+    }
   }
   @media screen and (max-width: $tabWidth) {
     padding: 1px 1px;
@@ -14,5 +18,35 @@
       grid-template-columns: 1fr;
       grid-template-rows: 90px 1fr;
     }
+  }
+}
+.screenTempleteContainer {
+  position: relative;
+  padding-left: 100px;
+  padding-top: 120px;
+  padding-right: 100px;
+  .icon {
+    position: absolute;
+    top: 0;
+    right: 0;
+    cursor: pointer;
+  }
+  .title {
+    font-weight: bold;
+    display: block;
+    font-size: 40px;
+    @media screen and (max-width: $tabWidth) {
+      font-size: 30px;
+    }
+  }
+  @media screen and (max-width: $tabWidth) {
+    padding-left: 80px;
+    padding-top: 60px;
+    padding-right: 20px;
+  }
+  @media screen and (max-width: $mobileWidth) {
+    padding-left: 20px;
+    padding-top: 60px;
+    padding-right: 20px;
   }
 }
