@@ -2,6 +2,11 @@
   font-family: 'Alegreya';
   src: local('Alegreya'), url(./fonts/Alegreya.ttf) format('truetype');
 }
+* {
+  box-sizing: border-box;
+}
 body {
   font-family: 'Alegreya';
+  margin: 0%;
+  padding: 0%;
 }
