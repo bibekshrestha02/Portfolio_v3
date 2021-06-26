@@ -20,6 +20,7 @@ export default function ImageComponent({ image, isAdmin, colors }) {
         onLoad={() => setImageLoading(false)}
         src={image}
         alt='profile'
+        onError={() => setImageLoading(true)}
         className={style.image}
         style={{
           border: `5px solid ${colors.navText}`,
