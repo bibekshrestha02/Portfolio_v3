@@ -1,0 +1,61 @@
+@import '../sass/mixin';
+.aboutScreenContainer {
+  .subTitle {
+    font-size: 30px;
+    letter-spacing: 1px;
+    font-weight: bold;
+  }
+  .description {
+    font-size: 18px;
+    letter-spacing: 1px;
+    font-weight: 300;
+    text-align: justify;
+  }
+  @media screen and (max-width: $tabWidth) {
+    .subTitle {
+      font-size: 40px;
+    }
+    .description {
+      font-size: 20px;
+    }
+  }
+  @media screen and (max-width: $mobileWidth) {
+    .subTitle {
+      font-size: 20px;
+    }
+    .description {
+      font-size: 18px;
+    }
+  }
+}
+.skillScreenContainer {
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr 1fr 1fr;
+  @media screen and (max-width: $mobileWidth) {
+    grid-template-columns: 1fr 1fr 1fr;
+  }
+}
+.projectsScreenContainer {
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr;
+  grid-column-gap: 10px;
+  grid-row-gap: 10px;
+
+  @media screen and (max-width: $tabWidth) {
+    grid-template-columns: 1fr 1fr;
+  }
+  @media screen and (max-width: $mobileWidth) {
+    grid-template-columns: 1fr;
+  }
+}
+.contactScreen {
+  p {
+    font-size: 20px;
+    text-align: justify;
+    letter-spacing: 1px;
+  }
+  i {
+    font: lighter;
+    font-size: 16px;
+  }
+}
