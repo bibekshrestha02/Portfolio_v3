@@ -160,3 +160,51 @@
 .icon {
   cursor: pointer;
 }
+.modelContainer {
+  background-color: rgba(0, 0, 0, 0.5);
+  position: fixed;
+  height: 100%;
+  width: 100%;
+  top: 0;
+  left: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  .container {
+    width: 50%;
+    min-height: 200px;
+    background-color: white;
+    padding: 20px;
+    .heading {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      span {
+        font-size: 18px;
+        letter-spacing: 2px;
+        font-weight: bold;
+      }
+    }
+    .body {
+      min-height: 100px;
+    }
+    .footer {
+      width: 100%;
+      background-color: rgba(0, 0, 0, 0.035);
+    }
+    @media screen and (max-width: $mobileWidth) {
+      padding: 10px;
+      width: 80%;
+
+      .heading {
+        span {
+          font-size: 16px;
+          letter-spacing: 1px;
+        }
+      }
+    }
+  }
+}
+.icon {
+  cursor: pointer;
+}
