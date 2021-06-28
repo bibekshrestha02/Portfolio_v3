@@ -1,8 +1,15 @@
 import React from 'react';
 import style from './style.module.scss';
 import { BiEdit } from 'react-icons/bi';
+import { IoMdAdd } from 'react-icons/io';
 import { useSelector } from 'react-redux';
-export default function ScreenTemplete({ title, editHandler, children }) {
+export default function ScreenTemplete({
+  title,
+  editHandler,
+  children,
+  isCreateButton,
+  createHandler,
+}) {
   const { isAdmin } = useSelector((state) => state.admin);
   const { screenBackground, text, primary } = useSelector(
     (state) => state.colors
@@ -39,9 +46,18 @@ export default function ScreenTemplete({ title, editHandler, children }) {
   return (
     <div className={style.screenTempleteContainer} style={containerStyle}>
       {isAdmin && (
-        <BiEdit className={style.icon} onClick={editHandler} size={30} />
+        <div>
+          <BiEdit className={style.icon} onClick={editHandler} size={30} />
+          {isCreateButton && (
+            <IoMdAdd
+              className={style.icon2}
+              onClick={createHandler}
+              size={30}
+            />
+          )}
+        </div>
       )}
-      {textColorChanger(title)}
+      <div>{textColorChanger(title)}</div>
       {children}
     </div>
   );
