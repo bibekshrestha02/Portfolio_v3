@@ -5,6 +5,7 @@ import { createStore, combineReducers, applyMiddleware } from 'redux';
 import ReduxThunk from 'redux-thunk';
 import ColorsReducer from './store/reducers/ColorsReducer';
 import AdminReducer from './store/reducers/AdminReducer';
+import LoadingComponent from './components/LoadingComponent';
 import { Route, Switch, BrowserRouter as Router } from 'react-router-dom';
 const AboutScreen = lazy(() => import('./screens/AboutScreen'));
 const ContactScreen = lazy(() => import('./screens/ContactScreen'));
@@ -22,7 +23,7 @@ function App() {
     <Provider store={store}>
       <Router>
         <MainTempletes>
-          <Suspense fallback={<h1>Loading....</h1>}>
+          <Suspense fallback={<LoadingComponent />}>
             <Switch>
               <Route exact path='/' component={AboutScreen} />
               <Route path='/contacts' component={ContactScreen} />
