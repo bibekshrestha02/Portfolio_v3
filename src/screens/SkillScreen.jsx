@@ -8,11 +8,20 @@ export default function SkillScreen() {
     return;
   };
   const { title, data } = useSelector((state) => state.admin.skill);
+  const { isAdmin } = useSelector((state) => state.admin);
+  const colors = useSelector((state) => state.colors);
+
   return (
-    <ScreenTemplete title={title} editHandler={editHandler}>
+    <ScreenTemplete title={title} editHandler={editHandler} isCreateButton>
       <div className={style.skillScreenContainer}>
         {data.map((e) => (
-          <TechnologyComponent name={e.name} icon={e.icon} key={e.name} />
+          <TechnologyComponent
+            isAdmin={isAdmin}
+            name={e.name}
+            icon={e.icon}
+            key={e.name}
+            colors={colors}
+          />
         ))}
       </div>
     </ScreenTemplete>

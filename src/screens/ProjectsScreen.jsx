@@ -8,12 +8,17 @@ export default function ProjectsScreen() {
     return;
   };
   const { title, data } = useSelector((state) => state.admin.project);
+  const { isAdmin } = useSelector((state) => state.admin);
+  const colors = useSelector((state) => state.colors);
+
   return (
-    <ScreenTemplete title={title} editHandler={editHandler}>
+    <ScreenTemplete title={title} editHandler={editHandler} isCreateButton>
       <div className={style.projectsScreenContainer}>
         {data.map((e) => {
           return (
             <ProjectComponent
+              isAdmin={isAdmin}
+              colors={colors}
               name={e.name}
               path={e.path}
               icon={e.icon}

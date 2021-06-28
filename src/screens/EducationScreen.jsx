@@ -7,11 +7,16 @@ export default function EducationScreen() {
     return;
   };
   const { title, courses } = useSelector((state) => state.admin.education);
+  const { isAdmin } = useSelector((state) => state.admin);
+  const colors = useSelector((state) => state.colors);
+
   return (
-    <ScreenTemplete title={title} editHandler={editHandler}>
+    <ScreenTemplete title={title} editHandler={editHandler} isCreateButton>
       {courses.map((course) => {
         return (
           <EducationDetailsCompoent
+            colors={colors}
+            isAdmin={isAdmin}
             key={course.name}
             name={course.name}
             place={course.place}
