@@ -31,6 +31,7 @@
   flex-direction: column;
   align-items: center;
   justify-content: center;
+  position: relative;
   .iconContainer {
     img {
       width: 40px;
@@ -45,6 +46,7 @@
 }
 .projectComponent {
   box-shadow: 0 0.5px 1.1px rgba(0, 0, 0, 0.035), 0 4px 9px rgba(0, 0, 0, 0.07);
+  position: relative;
   a {
     text-decoration: none;
     display: flex;
@@ -149,4 +151,12 @@
       transform: rotate(405deg);
     }
   }
+}
+.editContainer {
+  position: absolute;
+  right: 0;
+  top: 0;
+}
+.icon {
+  cursor: pointer;
 }
