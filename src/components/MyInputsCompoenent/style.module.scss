@@ -1,0 +1,50 @@
+@import '../../sass/mixin';
+
+.myTextInputContainer {
+  line-height: 40px;
+  span {
+    display: block;
+    font-size: 16px;
+    font-weight: lighter;
+    letter-spacing: 1px;
+  }
+  input {
+    height: 40px;
+    width: 100%;
+    border-radius: 5px;
+    border: 2px solid gray;
+    font-size: 16px;
+    letter-spacing: 1px;
+    padding-left: 5px;
+    outline: none;
+  }
+  .error {
+    &::before {
+      content: '*';
+    }
+  }
+}
+.myColorInputContainer {
+  line-height: 50px;
+  width: 80%;
+  label {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    font-size: 16px;
+    font-weight: bold;
+    letter-spacing: 1px;
+  }
+  input {
+    width: 40px;
+    height: 40px;
+    overflow: hidden;
+    outline: hidden;
+    background-color: white;
+  }
+  .error {
+    &::before {
+      content: '*';
+    }
+  }
+}
