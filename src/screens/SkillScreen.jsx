@@ -1,53 +1,57 @@
-import React from 'react';
+import React, { lazy } from 'react';
 import ScreenTemplete from '../templetes/ScreenTemplete';
 import { useSelector } from 'react-redux';
 import TechnologyComponent from '../components/TechnologyComponent';
 import style from './style.module.scss';
-import ModelComponent from '../components/ModelComponent';
 import MyTextInput from '../components/MyInputsCompoenent/MyTextInput';
 import * as yup from 'yup';
 import ImageAssets from '../assets/ImageAssets';
+const ModelComponent = lazy(() => import('../components/ModelComponent'));
 
 export default function SkillScreen() {
-  const [isEditModel, setEditModel] = React.useState(false);
-  const [isSkillsModel, setSkillsModel] = React.useState(false);
-  const skillsModelHandler = () => {
-    setSkillsModel((e) => !e);
-    return;
-  };
-  const editModalHandler = () => {
-    setEditModel((e) => !e);
-    return;
-  };
+  const [isPageEdit, setPageEdit] = React.useState(false);
+  const [isCreateModel, setCreateModel] = React.useState(false);
   const { title, data } = useSelector((state) => state.admin.skill);
   const { isAdmin } = useSelector((state) => state.admin);
   const colors = useSelector((state) => state.colors);
-  const initalValue = {
-    title: title ? title : '',
-  };
-  const validationSchema = yup.object({
-    title: yup.string().min(4).max(100).required(),
-  });
-  const submitHandler = (values) => {
-    console.log(values);
-  };
-  const skillsInitalValue = {
+  const initalValues = {
     name: '',
     icon: '',
   };
-  const skillsValidationSchema = yup.object({
+  const pageInitalValues = {
+    title: title ? title : '',
+  };
+  const validationSchema = yup.object({
     name: yup.string().min(4).max(100).required(),
     icon: yup.string().min(4).required(),
   });
-  const skillsSubmitHandler = (values) => {
+  const pageValidationSchema = yup.object({
+    title: yup.string().min(4).max(100).required(),
+  });
+  const createModelToggler = () => {
+    setCreateModel((e) => !e);
+    return;
+  };
+  const pageModelToggler = () => {
+    setPageEdit((e) => !e);
+    return;
+  };
+  const pageSubmitHandler = (values) => {
     console.log(values);
   };
+  const createSubmitHandler = (values) => {
+    console.log(values);
+  };
+  const updateHandler = (values) => {
+    console.log(values);
+  };
+  const deleteHandler = () => {};
   return (
     <ScreenTemplete
       title={title}
-      editHandler={editModalHandler}
+      editHandler={pageModelToggler}
       isCreateButton
-      createHandler={skillsModelHandler}>
+      createHandler={createModelToggler}>
       <div className={style.skillScreenContainer}>
         {data.map((e) => (
           <TechnologyComponent
@@ -56,16 +60,20 @@ export default function SkillScreen() {
             icon={e.icon}
             key={e.name}
             colors={colors}
+            updateHandler={updateHandler}
+            validationSchema={validationSchema}
+            deleteHandler={deleteHandler}
           />
         ))}
       </div>
-      {isEditModel && (
+      {/* page edit model */}
+      {isPageEdit && (
         <ModelComponent
           title='Edit Page'
-          closeHandler={editModalHandler}
-          initalValues={initalValue}
-          validationSchema={validationSchema}
-          submitHandler={submitHandler}>
+          closeHandler={pageModelToggler}
+          initalValues={pageInitalValues}
+          validationSchema={pageValidationSchema}
+          submitHandler={pageSubmitHandler}>
           {() => {
             return (
               <>
@@ -79,13 +87,14 @@ export default function SkillScreen() {
           }}
         </ModelComponent>
       )}
-      {isSkillsModel && (
+      {/* Create Skills Model */}
+      {isCreateModel && (
         <ModelComponent
           title='Add Skills'
-          closeHandler={skillsModelHandler}
-          initalValues={skillsInitalValue}
-          validationSchema={skillsValidationSchema}
-          submitHandler={skillsSubmitHandler}>
+          closeHandler={createModelToggler}
+          initalValues={initalValues}
+          validationSchema={validationSchema}
+          submitHandler={createSubmitHandler}>
           {(value) => {
             return (
               <>
