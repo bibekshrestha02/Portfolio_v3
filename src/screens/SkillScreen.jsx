@@ -6,8 +6,15 @@ import style from './style.module.scss';
 import ModelComponent from '../components/ModelComponent';
 import MyTextInput from '../components/MyInputsCompoenent/MyTextInput';
 import * as yup from 'yup';
+import ImageAssets from '../assets/ImageAssets';
+
 export default function SkillScreen() {
   const [isEditModel, setEditModel] = React.useState(false);
+  const [isSkillsModel, setSkillsModel] = React.useState(false);
+  const skillsModelHandler = () => {
+    setSkillsModel((e) => !e);
+    return;
+  };
   const editModalHandler = () => {
     setEditModel((e) => !e);
     return;
@@ -24,8 +31,23 @@ export default function SkillScreen() {
   const submitHandler = (values) => {
     console.log(values);
   };
+  const skillsInitalValue = {
+    name: '',
+    icon: '',
+  };
+  const skillsValidationSchema = yup.object({
+    name: yup.string().min(4).max(100).required(),
+    icon: yup.string().min(4).required(),
+  });
+  const skillsSubmitHandler = (values) => {
+    console.log(values);
+  };
   return (
-    <ScreenTemplete title={title} editHandler={editModalHandler} isCreateButton>
+    <ScreenTemplete
+      title={title}
+      editHandler={editModalHandler}
+      isCreateButton
+      createHandler={skillsModelHandler}>
       <div className={style.skillScreenContainer}>
         {data.map((e) => (
           <TechnologyComponent
@@ -51,6 +73,32 @@ export default function SkillScreen() {
                   name='title'
                   label='Title'
                   placeholder='Enter Title'
+                />
+              </>
+            );
+          }}
+        </ModelComponent>
+      )}
+      {isSkillsModel && (
+        <ModelComponent
+          title='Add Skills'
+          closeHandler={skillsModelHandler}
+          initalValues={skillsInitalValue}
+          validationSchema={skillsValidationSchema}
+          submitHandler={skillsSubmitHandler}>
+          {(value) => {
+            return (
+              <>
+                <ImageAssets path={value.icon} />
+                <MyTextInput
+                  name='icon'
+                  label='Icon'
+                  placeholder='Enter Icon'
+                />
+                <MyTextInput
+                  name='name'
+                  label='Name'
+                  placeholder='Enter Name'
                 />
               </>
             );
