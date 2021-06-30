@@ -7,7 +7,8 @@ export default function ButtonAssets({ props, title, styles }) {
     <button
       style={{ backgroundColor: primary, ...styles }}
       className={style.button}
-      {...props}>
+      {...props}
+      type='submit'>
       {title}
     </button>
   );
