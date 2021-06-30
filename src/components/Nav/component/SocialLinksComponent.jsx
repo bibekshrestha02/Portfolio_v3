@@ -4,7 +4,12 @@ import { IoAddCircleOutline, IoRemoveOutline } from 'react-icons/io5';
 
 import { AiOutlineEdit } from 'react-icons/ai';
 
-export default function SocialLinksComponent({ socialLinks, isAdmin, colors }) {
+export default function SocialLinksComponent({
+  socialLinks,
+  isAdmin,
+  colors,
+  socialModelHandler,
+}) {
   return (
     <div className={style.socialLinksContainer}>
       {socialLinks.map((link) => {
@@ -13,7 +18,11 @@ export default function SocialLinksComponent({ socialLinks, isAdmin, colors }) {
             {isAdmin && (
               <div className={style.removeContainer}>
                 <IoRemoveOutline color={colors.warning} size={18} />
-                <AiOutlineEdit color={colors.navText} size={18} />
+                <AiOutlineEdit
+                  color={colors.navText}
+                  size={18}
+                  onClick={socialModelHandler}
+                />
               </div>
             )}
             <a href={link.link} target='_blank' rel='noreferrer'>
@@ -25,7 +34,11 @@ export default function SocialLinksComponent({ socialLinks, isAdmin, colors }) {
 
       {isAdmin && (
         <div className={style.iconContainer}>
-          <IoAddCircleOutline color={colors.navText} size={30} />
+          <IoAddCircleOutline
+            color={colors.navText}
+            onClick={socialModelHandler}
+            size={30}
+          />
         </div>
       )}
     </div>

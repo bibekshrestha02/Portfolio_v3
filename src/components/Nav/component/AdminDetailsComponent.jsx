@@ -6,6 +6,7 @@ export default function AdminDetailsComponent({
   title,
   isAdmin,
   colors,
+  adminDetailsHandler,
 }) {
   return (
     <div className={style.adminDetails}>
@@ -16,7 +17,12 @@ export default function AdminDetailsComponent({
         <span style={{ color: colors.navText }}>{title}</span>
       </div>
       {isAdmin && (
-        <BiEdit size={20} className={style.icon} color={colors.navText} />
+        <BiEdit
+          size={20}
+          className={style.icon}
+          color={colors.navText}
+          onClick={adminDetailsHandler}
+        />
       )}
     </div>
   );
