@@ -8,28 +8,30 @@ import { FaProjectDiagram } from 'react-icons/fa';
 import SocialLinksComponent from './component/SocialLinksComponent';
 import ImageComponent from './component/ImageComponent';
 import AdminDetailsComponent from './component/AdminDetailsComponent';
-import ModelComponents from './component/ModelComponent';
 import { FiMenu } from 'react-icons/fi';
 export default function NavComponent() {
   const colors = useSelector((state) => state.colors);
   const { name, title, isAdmin } = useSelector((state) => state.admin);
   const socialLinks = useSelector((state) => state.admin.socialLinks);
   const [isNavToogle, setNavToogle] = useState(false);
-  const [isProfileModel, setProfileModel] = useState(false);
-  const [isColorModel, setColorModel] = useState(false);
-  const [isAdminDetailModel, setAdminDetailModel] = useState(false);
-  const [isSocialModel, setSocialModel] = useState(false);
-  const profileModelHandler = () => {
-    return setProfileModel((e) => !e);
+
+  const profileImageSubmitHandler = () => {
+    return;
   };
-  const colorModelHandler = () => {
-    return setColorModel((e) => !e);
+  const colorSubmitHandler = () => {
+    return;
   };
-  const adminDetailHandler = () => {
-    return setAdminDetailModel((e) => !e);
+  const adminDetailSubmitHandler = () => {
+    return;
   };
-  const socialModelHandler = () => {
-    return setSocialModel((e) => !e);
+  const socailSubmitHandler = () => {
+    return;
+  };
+  const socailUpdateHandler = () => {
+    return;
+  };
+  const socailDeleteHandler = () => {
+    return;
   };
   const links = [
     {
@@ -69,7 +71,9 @@ export default function NavComponent() {
         socialLinks={socialLinks}
         isAdmin={isAdmin}
         colors={colors}
-        socialModelHandler={socialModelHandler}
+        updateHandler={socailUpdateHandler}
+        submitHandler={socailSubmitHandler}
+        deleteHandler={socailDeleteHandler}
       />
     </div>
   );
@@ -80,15 +84,15 @@ export default function NavComponent() {
           colors={colors}
           image='./profile.jpg'
           isAdmin={isAdmin}
-          profileModelHandler={profileModelHandler}
-          colorModelHandler={colorModelHandler}
+          colorSubmitHandler={colorSubmitHandler}
+          profileImageSubmitHandler={profileImageSubmitHandler}
         />
         <AdminDetailsComponent
           colors={colors}
           name={name}
           title={title}
           isAdmin={isAdmin}
-          adminDetailsHandler={adminDetailHandler}
+          submitHandler={adminDetailSubmitHandler}
         />
         <div className={style.links}>{linksContainer}</div>
         <FiMenu
@@ -98,16 +102,7 @@ export default function NavComponent() {
           onClick={() => setNavToogle((e) => !e)}
         />
       </div>
-      <ModelComponents
-        isProfileModel={isProfileModel}
-        isColorModel={isColorModel}
-        isAdminDetailModel={isAdminDetailModel}
-        profileModelHandler={profileModelHandler}
-        colorModelHandler={colorModelHandler}
-        adminDetailHandler={adminDetailHandler}
-        isSocialModel={isSocialModel}
-        socialModelHandler={socialModelHandler}
-      />
+
       {isNavToogle && (
         <div
           className={style.minLinks}
