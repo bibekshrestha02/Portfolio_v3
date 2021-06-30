@@ -44,6 +44,8 @@ export default function ProjectsScreen() {
   const projectSubmitHandler = (values) => {
     console.log(values);
   };
+  const updateHandler = () => {};
+  const deleteHandler = () => {};
   return (
     <ScreenTemplete
       title={title}
@@ -60,6 +62,9 @@ export default function ProjectsScreen() {
               path={e.path}
               icon={e.icon}
               key={e.name}
+              validationSchema={projectValidationSchema}
+              updateHandler={updateHandler}
+              deleteHandler={deleteHandler}
             />
           );
         })}
