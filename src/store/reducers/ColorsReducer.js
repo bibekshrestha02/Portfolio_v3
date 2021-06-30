@@ -5,7 +5,7 @@ const initalState = {
   navHover: '#4DA8DA',
   pageBackground: '#EEFBFB',
   screenBackground: '#FFFFFF',
-  warning: 'red',
+  warning: '#FF0000',
 };
 
 export default function colorReducer(state = initalState, actions) {
