@@ -7,8 +7,13 @@ import MyTextInput from '../components/MyInputsCompoenent/MyTextInput';
 import * as yup from 'yup';
 export default function EducationScreen() {
   const [isEditModel, setEditModel] = React.useState(false);
+  const [isEducationModel, setEducationModel] = React.useState(false);
   const editModalHandler = () => {
     setEditModel((e) => !e);
+    return;
+  };
+  const educationModelHandler = () => {
+    setEducationModel((e) => !e);
     return;
   };
   const { title, courses } = useSelector((state) => state.admin.education);
@@ -23,8 +28,27 @@ export default function EducationScreen() {
   const submitHandler = (values) => {
     console.log(values);
   };
+  const educationInitalValue = {
+    name: '',
+    place: '',
+    year: '',
+    branch: '',
+  };
+  const educationValidationSchema = yup.object({
+    name: yup.string().min(4).max(100).required(),
+    place: yup.string().min(4).max(100).required(),
+    year: yup.string().min(4).max(100).required(),
+    branch: yup.string().min(4).max(100).required(),
+  });
+  const educationSubmitHandler = (values) => {
+    console.log(values);
+  };
   return (
-    <ScreenTemplete title={title} editHandler={editModalHandler} isCreateButton>
+    <ScreenTemplete
+      title={title}
+      editHandler={editModalHandler}
+      isCreateButton
+      createHandler={educationModelHandler}>
       {courses.map((course) => {
         return (
           <EducationDetailsCompoent
@@ -52,6 +76,41 @@ export default function EducationScreen() {
                   name='title'
                   label='Title'
                   placeholder='Enter Title'
+                />
+              </>
+            );
+          }}
+        </ModelComponent>
+      )}
+      {isEducationModel && (
+        <ModelComponent
+          title='Add Education'
+          closeHandler={educationModelHandler}
+          initalValues={educationInitalValue}
+          validationSchema={educationValidationSchema}
+          submitHandler={educationSubmitHandler}>
+          {() => {
+            return (
+              <>
+                <MyTextInput
+                  name='name'
+                  label='Name'
+                  placeholder='Enter Name'
+                />
+                <MyTextInput
+                  name='place'
+                  label='Place'
+                  placeholder='Enter Place'
+                />
+                <MyTextInput
+                  name='year'
+                  label='Year'
+                  placeholder='Enter Year'
+                />
+                <MyTextInput
+                  name='branch'
+                  label='Branch'
+                  placeholder='Enter Branch'
                 />
               </>
             );
