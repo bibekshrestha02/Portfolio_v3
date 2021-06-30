@@ -5,12 +5,18 @@ import ProjectComponent from '../components/ProjectComponent';
 import style from './style.module.scss';
 import ModelComponent from '../components/ModelComponent';
 import MyTextInput from '../components/MyInputsCompoenent/MyTextInput';
+import ImageAssets from '../assets/ImageAssets';
 import * as yup from 'yup';
 
 export default function ProjectsScreen() {
   const [isEditModel, setEditModel] = React.useState(false);
+  const [isProjectModel, setProjectModel] = React.useState(false);
   const editModalHandler = () => {
     setEditModel((e) => !e);
+    return;
+  };
+  const projectModelHandler = () => {
+    setProjectModel((e) => !e);
     return;
   };
   const { title, data } = useSelector((state) => state.admin.project);
@@ -25,8 +31,25 @@ export default function ProjectsScreen() {
   const submitHandler = (values) => {
     console.log(values);
   };
+  const projectInitalValue = {
+    name: '',
+    path: '',
+    icon: '',
+  };
+  const projectValidationSchema = yup.object({
+    name: yup.string().min(4).max(100).required(),
+    path: yup.string().min(4).required(),
+    icon: yup.string().min(4).required(),
+  });
+  const projectSubmitHandler = (values) => {
+    console.log(values);
+  };
   return (
-    <ScreenTemplete title={title} editHandler={editModalHandler} isCreateButton>
+    <ScreenTemplete
+      title={title}
+      editHandler={editModalHandler}
+      isCreateButton
+      createHandler={projectModelHandler}>
       <div className={style.projectsScreenContainer}>
         {data.map((e) => {
           return (
@@ -55,6 +78,37 @@ export default function ProjectsScreen() {
                   name='title'
                   label='Title'
                   placeholder='Enter Title'
+                />
+              </>
+            );
+          }}
+        </ModelComponent>
+      )}
+      {isProjectModel && (
+        <ModelComponent
+          title='Add Project'
+          closeHandler={projectModelHandler}
+          initalValues={projectInitalValue}
+          validationSchema={projectValidationSchema}
+          submitHandler={projectSubmitHandler}>
+          {(value) => {
+            return (
+              <>
+                <ImageAssets path={value.icon} />
+                <MyTextInput
+                  name='icon'
+                  label='Icon'
+                  placeholder='Enter Icon'
+                />
+                <MyTextInput
+                  name='name'
+                  label='Name'
+                  placeholder='Enter Name'
+                />
+                <MyTextInput
+                  name='path'
+                  label='Path'
+                  placeholder='Enter Path'
                 />
               </>
             );
