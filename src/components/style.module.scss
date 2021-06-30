@@ -170,11 +170,12 @@
   display: flex;
   align-items: center;
   justify-content: center;
+  z-index: 1;
   .container {
     width: 50%;
     min-height: 200px;
     background-color: white;
-    padding: 20px;
+    padding: 10px;
     .heading {
       display: flex;
       align-items: center;
@@ -184,11 +185,17 @@
         letter-spacing: 2px;
         font-weight: bold;
       }
+      .iconContainer {
+        width: 50px;
+        display: flex;
+        justify-content: space-between;
+      }
     }
     .body {
       min-height: 100px;
     }
     .footer {
+      margin-top: 10px;
       width: 100%;
       background-color: rgba(0, 0, 0, 0.035);
     }
