@@ -1,0 +1,1 @@
+export const EDIT_ABOUT_PAGE = 'EDIT_ABOUT_PAGE';
