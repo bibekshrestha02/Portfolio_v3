@@ -1,11 +1,11 @@
-import React, { lazy, useState } from 'react';
+import React, { useState } from 'react';
 import style from '../style.module.scss';
 import { IoAddCircleOutline, IoRemoveOutline } from 'react-icons/io5';
 import { AiOutlineEdit } from 'react-icons/ai';
 import MyTextInput from '../../MyInputsCompoenent/MyTextInput';
 import ImageAssets from '../../../assets/ImageAssets';
 import * as Yup from 'yup';
-const ModelComponent = lazy(() => import('../../../components/ModelComponent'));
+import ModelComponent from '../../../components/ModelComponent';
 const SocialIconComponent = ({
   isAdmin,
   link,
@@ -101,6 +101,7 @@ export default function SocialLinksComponent({
             <SocialIconComponent
               isAdmin={isAdmin}
               link={link}
+              key={link.link}
               colors={colors}
               updateHandler={updateHandler}
               validationSchema={validationSchema}
