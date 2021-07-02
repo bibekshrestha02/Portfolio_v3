@@ -22,8 +22,8 @@ function App() {
   return (
     <Provider store={store}>
       <Router>
-        <Suspense fallback={<LoadingComponent />}>
-          <MainTempletes>
+        <MainTempletes>
+          <Suspense fallback={<LoadingComponent />}>
             <Switch>
               <Route exact path='/' component={AboutScreen} />
               <Route path='/contacts' component={ContactScreen} />
@@ -32,8 +32,8 @@ function App() {
               <Route path='/skills' component={SkillScreen} />
               <Route path='*' component={AboutScreen} />
             </Switch>
-          </MainTempletes>
-        </Suspense>
+          </Suspense>
+        </MainTempletes>
       </Router>
     </Provider>
   );
