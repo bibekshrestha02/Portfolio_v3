@@ -1,4 +1,4 @@
-import React, { useState, lazy } from 'react';
+import React, { useState } from 'react';
 import style from '../style.module.scss';
 import { IoMdColorPalette } from 'react-icons/io';
 import { BsFillPersonFill } from 'react-icons/bs';
@@ -7,7 +7,7 @@ import MyColorInput from '../../MyInputsCompoenent/MyColorInput';
 import ImageAssets from '../../../assets/ImageAssets';
 import * as Yup from 'yup';
 import { useSelector } from 'react-redux';
-const ModelComponent = lazy(() => import('../../ModelComponent'));
+import ModelComponent from '../../ModelComponent';
 export default function ImageComponent({
   image,
   isAdmin,

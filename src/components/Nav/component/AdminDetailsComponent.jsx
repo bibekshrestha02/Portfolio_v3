@@ -1,9 +1,9 @@
-import React, { lazy } from 'react';
+import React from 'react';
 import style from '../style.module.scss';
 import { BiEdit } from 'react-icons/bi';
 import MyTextInput from '../../MyInputsCompoenent/MyTextInput';
 import * as Yup from 'yup';
-const ModelComponent = lazy(() => import('../../../components/ModelComponent'));
+import ModelComponent from '../../../components/ModelComponent';
 export default function AdminDetailsComponent({
   name,
   title,
