@@ -5,6 +5,7 @@ const initailState = {
   about: {
     title: "Hellow, I'm Bibek",
     subTitle: 'I make web & mobile applications',
+    cvPath: '',
     description:
       "Though I've no job experience, I've made a couples of awesome projects using modern technologies like React, Node, Monogo etc. I'm learning programming since 2018. I'm looking forward for having a job.",
   },
