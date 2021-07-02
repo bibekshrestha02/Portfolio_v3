@@ -20,7 +20,7 @@ export default function ModelComponent({
       validationSchema={validationSchema}
       initialValues={initalValues}
       onSubmit={submitHandler}>
-      {({ values, resetForm }) => {
+      {({ values, resetForm, isSubmitting }) => {
         return (
           <Form>
             <div className={style.modelContainer} style={{ color: text }}>
@@ -28,16 +28,23 @@ export default function ModelComponent({
                 <div className={style.heading}>
                   <span style={{ color: primary }}>{title}</span>
                   <div className={style.iconContainer}>
-                    <GrPowerReset className={style.icon} onClick={resetForm} />
+                    <GrPowerReset
+                      className={style.icon}
+                      onClick={isSubmitting ? null : resetForm}
+                    />
                     <AiOutlineClose
                       className={style.icon}
-                      onClick={closeHandler}
+                      onClick={isSubmitting ? null : closeHandler}
                     />
                   </div>
                 </div>
                 <div className={style.body}>{children(values)}</div>
                 <div className={style.footer}>
-                  <ButtonAssets title='Submit' styles={{ width: '100%' }} />
+                  <ButtonAssets
+                    title='Submit'
+                    styles={{ width: '100%' }}
+                    isSubmitting={isSubmitting}
+                  />
                 </div>
               </div>
             </div>
