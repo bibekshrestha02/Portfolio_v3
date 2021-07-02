@@ -1,3 +1,4 @@
+import { EDIT_ABOUT_PAGE } from '../constants/AdminConstants';
 const initailState = {
   name: 'Bibek Shrestha',
   title: 'MERN Stack Developer',
@@ -118,5 +119,15 @@ const initailState = {
 };
 
 export default function mainReducer(state = initailState, actions) {
-  return state;
+  switch (actions.type) {
+    case EDIT_ABOUT_PAGE:
+      let { data } = actions.payload;
+
+      return {
+        ...state,
+        about: data,
+      };
+    default:
+      return state;
+  }
 }
