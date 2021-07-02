@@ -1,14 +1,16 @@
 import React from 'react';
 import ScreenTemplete from '../templetes/ScreenTemplete';
-import { useSelector } from 'react-redux';
+import { useSelector, useDispatch } from 'react-redux';
 import ButtonAssets from '../assets/ButtonAssets';
 import style from './style.module.scss';
 import ModelComponent from '../components/ModelComponent';
 import MyTextInput from '../components/MyInputsCompoenent/MyTextInput';
 import MyTextArea from '../components/MyInputsCompoenent/MyTextArea';
 import * as yup from 'yup';
+import { editAboutPageAction } from '../store/actions/AdminActions';
 export default function AboutScreen() {
   const [isEditModel, setEditModel] = React.useState(false);
+  const dispatch = useDispatch();
   const editModalHandler = () => {
     setEditModel((e) => !e);
     return;
@@ -28,8 +30,15 @@ export default function AboutScreen() {
     description: yup.string().min(4).max(500).required(),
     cvPath: yup.string().required(),
   });
-  const submitHandler = (values) => {
-    console.log(values);
+  const submitHandler = async (values, { setSubmitting }) => {
+    try {
+      setSubmitting(true);
+      await dispatch(editAboutPageAction(values));
+      setSubmitting(false);
+      alert('Sucess!');
+    } catch (error) {
+      console.log(error);
+    }
   };
   return (
     <ScreenTemplete title={title} editHandler={editModalHandler}>
