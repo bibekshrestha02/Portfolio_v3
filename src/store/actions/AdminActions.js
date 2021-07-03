@@ -7,6 +7,12 @@ import {
   CREATE_EDUCATION,
   EDIT_EDUCATION,
   DELETE_EDUCATION,
+  CREATE_PROJECT,
+  CREATE_SKILL,
+  EDIT_PROJECT,
+  EDIT_SKILL,
+  DELETE_PROJECT,
+  DELETE_SKILL,
 } from '../constants/AdminConstants';
 export function editAboutPageAction(data) {
   return (dispatch) => {
@@ -28,30 +34,11 @@ export function editContactPageAction(data) {
     });
   };
 }
+// EDUCATION PAGE ACTIONS
 export function editEducationTitlePageAction(title) {
   return (dispatch) => {
     dispatch({
       type: EDIT_EDUCATION_PAGE_TITLE,
-      payload: {
-        title,
-      },
-    });
-  };
-}
-export function editProjectTitlePageAction(title) {
-  return (dispatch) => {
-    dispatch({
-      type: EDIT_PROJECT_PAGE_TITLE,
-      payload: {
-        title,
-      },
-    });
-  };
-}
-export function editSkillTitlePageAction(title) {
-  return (dispatch) => {
-    dispatch({
-      type: EDIT_SKILL_PAGE_TITLE,
       payload: {
         title,
       },
@@ -82,6 +69,88 @@ export function deleteEducationAction(id) {
   return (dispatch) => {
     dispatch({
       type: DELETE_EDUCATION,
+      payload: {
+        id,
+      },
+    });
+  };
+}
+// PROJECT PAGE ACTIONS
+export function editProjectTitlePageAction(title) {
+  return (dispatch) => {
+    dispatch({
+      type: EDIT_PROJECT_PAGE_TITLE,
+      payload: {
+        title,
+      },
+    });
+  };
+}
+export function createProjectAction(data) {
+  return (dispatch) => {
+    dispatch({
+      type: CREATE_PROJECT,
+      payload: {
+        data,
+      },
+    });
+  };
+}
+export function editProjectAction(data) {
+  return (dispatch) => {
+    dispatch({
+      type: EDIT_PROJECT,
+      payload: {
+        data,
+      },
+    });
+  };
+}
+export function deleteProjectAction(id) {
+  return (dispatch) => {
+    dispatch({
+      type: DELETE_PROJECT,
+      payload: {
+        id,
+      },
+    });
+  };
+}
+// SKILL PAGE ACTIONS
+export function editSkillTitlePageAction(title) {
+  return (dispatch) => {
+    dispatch({
+      type: EDIT_SKILL_PAGE_TITLE,
+      payload: {
+        title,
+      },
+    });
+  };
+}
+export function createSkillAction(data) {
+  return (dispatch) => {
+    dispatch({
+      type: CREATE_SKILL,
+      payload: {
+        data,
+      },
+    });
+  };
+}
+export function editSkillAction(data) {
+  return (dispatch) => {
+    dispatch({
+      type: EDIT_SKILL,
+      payload: {
+        data,
+      },
+    });
+  };
+}
+export function deleteSkillAction(id) {
+  return (dispatch) => {
+    dispatch({
+      type: DELETE_SKILL,
       payload: {
         id,
       },
