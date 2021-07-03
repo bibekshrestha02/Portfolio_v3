@@ -4,10 +4,7 @@ import { AiOutlineDelete, AiOutlineEdit } from 'react-icons/ai';
 import MyTextInput from './MyInputsCompoenent/MyTextInput';
 const ModelComponent = lazy(() => import('../components/ModelComponent'));
 export default function EducationDetailsCompoent({
-  name,
-  place,
-  year,
-  branch,
+  course,
   isAdmin,
   colors,
   validationSchema,
@@ -19,18 +16,19 @@ export default function EducationDetailsCompoent({
     return setUpdateModel((e) => !e);
   };
   const educationInitalValue = {
-    name,
-    place,
-    year,
-    branch,
+    name: course.name,
+    place: course.place,
+    year: course.year,
+    branch: course.branch,
+    _id: course._id,
   };
   return (
     <>
       <div className={style.educationContainer}>
         <div>
-          <span className={style.title}>{name}</span>
-          <p>{place}</p>
-          <span>{branch}</span>
+          <span className={style.title}>{course.name}</span>
+          <p>{course.place}</p>
+          <span>{course.branch}</span>
         </div>
         <div>
           {isAdmin && (
@@ -39,7 +37,7 @@ export default function EducationDetailsCompoent({
                 color={colors.warning}
                 size={20}
                 onClick={() => {
-                  deleteHandler(name);
+                  deleteHandler(course._id);
                 }}
                 className={style.icon}
               />
@@ -51,7 +49,7 @@ export default function EducationDetailsCompoent({
               />
             </div>
           )}
-          <span>{year}</span>
+          <span>{course.year ? course.year : 'running'}</span>
         </div>
       </div>
       {isUpdateModel && (
