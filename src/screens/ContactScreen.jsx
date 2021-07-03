@@ -1,13 +1,15 @@
 import React from 'react';
 import ScreenTemplete from '../templetes/ScreenTemplete';
-import { useSelector } from 'react-redux';
+import { useSelector, useDispatch } from 'react-redux';
 import style from './style.module.scss';
 import ModelComponent from '../components/ModelComponent';
 import MyTextInput from '../components/MyInputsCompoenent/MyTextInput';
 import MyTextArea from '../components/MyInputsCompoenent/MyTextArea';
 import * as yup from 'yup';
+import { editContactPageAction } from '../store/actions/AdminActions';
 export default function ContactScreen() {
   const [isEditModel, setEditModel] = React.useState(false);
+  const dispatch = useDispatch();
   const editModalHandler = () => {
     setEditModel((e) => !e);
     return;
@@ -28,8 +30,11 @@ export default function ContactScreen() {
     subDetail: yup.string().min(4).max(500).required(),
     email: yup.string().email().required(),
   });
-  const submitHandler = (values) => {
+  const submitHandler = (values, { setSubmitting }) => {
+    setSubmitting(true);
     console.log(values);
+    dispatch(editContactPageAction(values));
+    setSubmitting(false);
   };
   return (
     <ScreenTemplete title={title} editHandler={editModalHandler}>
