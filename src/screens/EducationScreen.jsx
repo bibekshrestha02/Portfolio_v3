@@ -1,19 +1,26 @@
 import React, { lazy, Suspense } from 'react';
 import ScreenTemplete from '../templetes/ScreenTemplete';
-import { useSelector } from 'react-redux';
+import { useSelector, useDispatch } from 'react-redux';
 import EducationDetailsCompoent from '../components/EducationDetailsCompoent';
 import LoadingComponent from '../components/LoadingComponent';
 import MyTextInput from '../components/MyInputsCompoenent/MyTextInput';
 import * as yup from 'yup';
+import {
+  editEducationTitlePageAction,
+  createEducationAction,
+  editEducationAction,
+  deleteEducationAction,
+} from '../store/actions/AdminActions';
 const ModelComponent = lazy(() => import('../components/ModelComponent'));
 export default function EducationScreen() {
   const [isPageEdit, setPageEdit] = React.useState(false);
   const [isCreateModel, setCreateModel] = React.useState(false);
-  const { title, courses } = useSelector((state) => state.admin.education);
+  const education = useSelector((state) => state.admin.education);
   const { isAdmin } = useSelector((state) => state.admin);
   const colors = useSelector((state) => state.colors);
+  const dispatch = useDispatch();
   const pageValue = {
-    title: title ? title : '',
+    title: education.title ? education.title : '',
   };
   const initalValue = {
     name: '',
@@ -22,10 +29,10 @@ export default function EducationScreen() {
     branch: '',
   };
   const validationSchema = yup.object({
-    name: yup.string().min(4).max(100).required(),
+    name: yup.string().min(3).max(100).required(),
     place: yup.string().min(4).max(100).required(),
-    year: yup.string().min(4).max(100).required(),
-    branch: yup.string().min(4).max(100).required(),
+    year: yup.string().min(4).max(100),
+    branch: yup.string().min(2).max(100).required(),
   });
   const pageValidationSchema = yup.object({
     title: yup.string().min(4).max(100).required(),
@@ -39,32 +46,41 @@ export default function EducationScreen() {
     return;
   };
   const pageSubmitHandler = (values) => {
-    console.log(values);
+    try {
+      dispatch(editEducationTitlePageAction(values.title));
+    } catch (error) {
+      console.log(error);
+    }
   };
   const createHandler = (values) => {
-    console.log(values);
+    dispatch(createEducationAction(values));
   };
-  const updateHandler = () => {};
-  const deleteHandler = (id) => {};
+  const editHandler = (values) => {
+    dispatch(editEducationAction(values));
+  };
+  const deleteHandler = (id) => {
+    let isConfirm = window.confirm('Are you sure?');
+    if (!isConfirm) {
+      return;
+    }
+    dispatch(deleteEducationAction(id));
+  };
   return (
     <Suspense fallback={<LoadingComponent />}>
       <ScreenTemplete
-        title={title}
+        title={education.title}
         editHandler={pageModelToggler}
         isCreateButton
         createHandler={createModelToggler}>
-        {courses.map((course) => {
+        {education.courses.map((course) => {
           return (
             <EducationDetailsCompoent
               colors={colors}
               isAdmin={isAdmin}
-              key={course.name}
-              name={course.name}
-              place={course.place}
-              year={course.year}
-              branch={course.branch}
+              key={course._id}
+              course={course}
               validationSchema={validationSchema}
-              updateHandler={updateHandler}
+              updateHandler={editHandler}
               deleteHandler={deleteHandler}
             />
           );
