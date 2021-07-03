@@ -1,14 +1,21 @@
 import React, { lazy } from 'react';
 import ScreenTemplete from '../templetes/ScreenTemplete';
-import { useSelector } from 'react-redux';
+import { useSelector, useDispatch } from 'react-redux';
 import TechnologyComponent from '../components/TechnologyComponent';
 import style from './style.module.scss';
 import MyTextInput from '../components/MyInputsCompoenent/MyTextInput';
 import * as yup from 'yup';
 import ImageAssets from '../assets/ImageAssets';
+import {
+  editSkillTitlePageAction,
+  createSkillAction,
+  deleteSkillAction,
+  editSkillAction,
+} from '../store/actions/AdminActions';
 const ModelComponent = lazy(() => import('../components/ModelComponent'));
 
 export default function SkillScreen() {
+  const dispatch = useDispatch();
   const [isPageEdit, setPageEdit] = React.useState(false);
   const [isCreateModel, setCreateModel] = React.useState(false);
   const { title, data } = useSelector((state) => state.admin.skill);
@@ -36,16 +43,20 @@ export default function SkillScreen() {
     setPageEdit((e) => !e);
     return;
   };
-  const pageSubmitHandler = (values) => {
-    console.log(values);
+  const editPageSubmitHandler = (values) => {
+    dispatch(editSkillTitlePageAction(values.title));
   };
   const createSubmitHandler = (values) => {
-    console.log(values);
+    dispatch(createSkillAction(values));
   };
   const updateHandler = (values) => {
-    console.log(values);
+    dispatch(editSkillAction(values));
   };
-  const deleteHandler = () => {};
+  const deleteHandler = (id) => {
+    const isConfirm = window.confirm('Are you sure? \n You wants to delete.');
+    if (!isConfirm) return;
+    dispatch(deleteSkillAction(id));
+  };
   return (
     <ScreenTemplete
       title={title}
@@ -53,12 +64,11 @@ export default function SkillScreen() {
       isCreateButton
       createHandler={createModelToggler}>
       <div className={style.skillScreenContainer}>
-        {data.map((e) => (
+        {data.map((skill) => (
           <TechnologyComponent
             isAdmin={isAdmin}
-            name={e.name}
-            icon={e.icon}
-            key={e.name}
+            skill={skill}
+            key={skill._id}
             colors={colors}
             updateHandler={updateHandler}
             validationSchema={validationSchema}
@@ -73,7 +83,7 @@ export default function SkillScreen() {
           closeHandler={pageModelToggler}
           initalValues={pageInitalValues}
           validationSchema={pageValidationSchema}
-          submitHandler={pageSubmitHandler}>
+          submitHandler={editPageSubmitHandler}>
           {() => {
             return (
               <>
