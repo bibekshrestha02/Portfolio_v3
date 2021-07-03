@@ -1,4 +1,13 @@
-import { EDIT_ABOUT_PAGE } from '../constants/AdminConstants';
+import {
+  EDIT_ABOUT_PAGE,
+  EDIT_CONTACT_PAGE,
+  EDIT_EDUCATION_PAGE_TITLE,
+  EDIT_PROJECT_PAGE_TITLE,
+  EDIT_SKILL_PAGE_TITLE,
+  CREATE_EDUCATION,
+  EDIT_EDUCATION,
+  DELETE_EDUCATION,
+} from '../constants/AdminConstants';
 const initailState = {
   name: 'Bibek Shrestha',
   title: 'MERN Stack Developer',
@@ -14,12 +23,14 @@ const initailState = {
     title: 'Educations',
     courses: [
       {
+        _id: '12220',
         name: 'Orchid English School',
         place: 'Harion 11 Sarlahi',
         branch: 'SEE',
         year: 2018,
       },
       {
+        _id: '1255',
         name: 'Janajyoti Multiple Campus ',
         place: 'Lalbandi, Sarlahi',
         branch: '+2 Management',
@@ -121,11 +132,70 @@ const initailState = {
 export default function mainReducer(state = initailState, actions) {
   switch (actions.type) {
     case EDIT_ABOUT_PAGE:
-      let { data } = actions.payload;
-
       return {
         ...state,
-        about: data,
+        about: actions.payload.data,
+      };
+    case EDIT_CONTACT_PAGE:
+      return {
+        ...state,
+        contact: actions.payload.data,
+      };
+    case EDIT_EDUCATION_PAGE_TITLE:
+      return {
+        ...state,
+        education: {
+          ...state.education,
+          title: actions.payload.title,
+        },
+      };
+    case EDIT_PROJECT_PAGE_TITLE:
+      return {
+        ...state,
+        project: {
+          ...state.project,
+          title: actions.payload.title,
+        },
+      };
+    case EDIT_SKILL_PAGE_TITLE:
+      return {
+        ...state,
+        skill: {
+          ...state.skill,
+          title: actions.payload.title,
+        },
+      };
+    case CREATE_EDUCATION:
+      return {
+        ...state,
+        education: {
+          ...state.education,
+          courses: state.education.courses.concat(actions.payload.data),
+        },
+      };
+    case EDIT_EDUCATION:
+      let allCourses = state.education.courses;
+      let courseIndex = allCourses.findIndex(
+        (e) => e._id === actions.payload.data._id
+      );
+      allCourses[courseIndex] = actions.payload.data;
+      return {
+        ...state,
+        education: {
+          ...state.education,
+          courses: allCourses,
+        },
+      };
+    case DELETE_EDUCATION:
+      let courses = state.education.courses.filter(
+        (e) => e._id !== actions.payload.id
+      );
+      return {
+        ...state,
+        education: {
+          ...state.education,
+          courses: courses,
+        },
       };
     default:
       return state;
