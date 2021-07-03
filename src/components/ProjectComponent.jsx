@@ -6,9 +6,7 @@ import MyTextInput from './MyInputsCompoenent/MyTextInput';
 import ImageAssets from '../assets/ImageAssets';
 const ModelComponent = lazy(() => import('./ModelComponent'));
 export default function ProjectComponent({
-  name,
-  path,
-  icon,
+  project,
   colors,
   isAdmin,
   validationSchema,
@@ -21,9 +19,9 @@ export default function ProjectComponent({
     setUpdateModel((e) => !e);
   };
   const initalValues = {
-    name,
-    path,
-    icon,
+    name: project.name,
+    path: project.path,
+    icon: project.icon,
   };
   return (
     <>
@@ -33,7 +31,7 @@ export default function ProjectComponent({
             <AiOutlineDelete
               color={colors.warning}
               size={20}
-              onClick={deleteHandler}
+              onClick={() => deleteHandler(project._id)}
               className={style.icon}
             />
             <AiOutlineEdit
@@ -45,19 +43,19 @@ export default function ProjectComponent({
           </div>
         )}
         <a
-          href={path}
+          href={project.path}
           target='_blank'
           rel='noreferrer'
           style={{ color: colors.text }}>
           <ImageLoadingComponent isLoading={isImageLoading} />
           <img
-            src={icon}
+            src={project.icon}
             alt='project'
             style={{ display: isImageLoading ? 'none' : 'block' }}
             onLoad={() => setImageLoading(false)}
             onError={() => setImageLoading(true)}
           />
-          <span>{name}</span>
+          <span>{project.name}</span>
         </a>
       </div>
       {isUpdateModel && (

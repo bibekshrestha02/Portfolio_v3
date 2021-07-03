@@ -5,8 +5,7 @@ import ImageAssets from '../assets/ImageAssets';
 import MyTextInput from './MyInputsCompoenent/MyTextInput';
 const ModelComponent = lazy(() => import('./ModelComponent'));
 export default function TechnologyComponent({
-  name,
-  icon,
+  skill,
   colors,
   isAdmin,
   updateHandler,
@@ -18,8 +17,9 @@ export default function TechnologyComponent({
     setUpdateModel((e) => !e);
   };
   const initalValues = {
-    name,
-    icon,
+    name: skill.name,
+    icon: skill.icon,
+    _id: skill._id,
   };
   return (
     <div className={style.technologyContainer}>
@@ -28,7 +28,7 @@ export default function TechnologyComponent({
           <AiOutlineDelete
             color={colors.warning}
             size={14}
-            onClick={deleteHandler}
+            onClick={() => deleteHandler(skill._id)}
             className={style.icon}
           />
           <AiOutlineEdit
@@ -41,9 +41,9 @@ export default function TechnologyComponent({
       )}
 
       <div className={style.iconContainer}>
-        <img src={icon} alt='icon' />
+        <img src={skill.icon} alt='icon' />
       </div>
-      <span>{name}</span>
+      <span>{skill.name}</span>
       {isUpdateModel && (
         <ModelComponent
           title='Update Skills'
