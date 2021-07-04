@@ -15,3 +15,11 @@ export const EDIT_SKILL_PAGE_TITLE = 'EDIT_SKILL_PAGE_TITLE';
 export const CREATE_SKILL = 'CREATE_SKILL';
 export const EDIT_SKILL = 'EDIT_SKILL';
 export const DELETE_SKILL = 'DELETE_SKILL';
+// Nav Constants
+export const EDIT_PROFILE = 'EDIT_PROFILE';
+export const EDIT_NAME = 'EDIT_NAME';
+export const EDIT_COLORS = 'EDIT_COLORS';
+// SOCIAL LINK CONSTANT
+export const CREATE_SOCIAL_lINK = 'CREATE_SOCIAL_lINK';
+export const EDIT_SOCIAL_lINK = 'EDIT_SOCIAL_lINK';
+export const DELETE_SOCIAL_lINK = 'DELETE_SOCIAL_lINK';

@@ -13,6 +13,12 @@ import {
   EDIT_SKILL,
   DELETE_PROJECT,
   DELETE_SKILL,
+  EDIT_NAME,
+  EDIT_COLORS,
+  EDIT_PROFILE,
+  EDIT_SOCIAL_lINK,
+  DELETE_SOCIAL_lINK,
+  CREATE_SOCIAL_lINK,
 } from '../constants/AdminConstants';
 export function editAboutPageAction(data) {
   return (dispatch) => {
@@ -151,6 +157,71 @@ export function deleteSkillAction(id) {
   return (dispatch) => {
     dispatch({
       type: DELETE_SKILL,
+      payload: {
+        id,
+      },
+    });
+  };
+}
+// EDIT NAME
+export function editNameAction(name, title) {
+  return (dispatch) => {
+    dispatch({
+      type: EDIT_NAME,
+      payload: {
+        name,
+        title,
+      },
+    });
+  };
+}
+// EDIT PROFILE
+export function editProfileAction(path) {
+  return (dispatch) => {
+    dispatch({
+      type: EDIT_PROFILE,
+      payload: {
+        path,
+      },
+    });
+  };
+}
+// EDIT COLOR
+export function editColorAction(data) {
+  return (dispatch) => {
+    dispatch({
+      type: EDIT_COLORS,
+      payload: {
+        data,
+      },
+    });
+  };
+}
+// SOCAIL LINKS
+export function createSocialLinkAction(data) {
+  return (dispatch) => {
+    dispatch({
+      type: CREATE_SOCIAL_lINK,
+      payload: {
+        data,
+      },
+    });
+  };
+}
+export function editSocialLinkAction(data) {
+  return (dispatch) => {
+    dispatch({
+      type: EDIT_SOCIAL_lINK,
+      payload: {
+        data,
+      },
+    });
+  };
+}
+export function deleteSocialLinkAction(id) {
+  return (dispatch) => {
+    dispatch({
+      type: DELETE_SOCIAL_lINK,
       payload: {
         id,
       },

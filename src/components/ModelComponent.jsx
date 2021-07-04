@@ -28,13 +28,10 @@ export default function ModelComponent({
                 <div className={style.heading}>
                   <span style={{ color: primary }}>{title}</span>
                   <div className={style.iconContainer}>
-                    <GrPowerReset
-                      className={style.icon}
-                      onClick={isSubmitting ? null : resetForm}
-                    />
+                    <GrPowerReset className={style.icon} onClick={resetForm} />
                     <AiOutlineClose
                       className={style.icon}
-                      onClick={isSubmitting ? null : closeHandler}
+                      onClick={closeHandler}
                     />
                   </div>
                 </div>
@@ -43,7 +40,7 @@ export default function ModelComponent({
                   <ButtonAssets
                     title='Submit'
                     styles={{ width: '100%' }}
-                    isSubmitting={isSubmitting}
+                    // isSubmitting={isSubmitting}
                   />
                 </div>
               </div>

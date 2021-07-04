@@ -13,7 +13,7 @@ export default function ImageComponent({
   isAdmin,
   colors,
   colorSubmitHandler,
-  profileImageSubmitHandler,
+  submitHandler,
 }) {
   const [isImageLoading, setImageLoading] = useState(true);
   const [isProfileModel, setProfileModel] = useState(false);
@@ -98,7 +98,7 @@ export default function ImageComponent({
           closeHandler={profileModelToggler}
           validationSchema={profileValidationSchema}
           initalValues={profileInitialValues}
-          submitHandler={profileImageSubmitHandler}>
+          submitHandler={submitHandler}>
           {(values) => {
             return (
               <>

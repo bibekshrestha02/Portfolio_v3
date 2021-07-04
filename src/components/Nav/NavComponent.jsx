@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { useSelector } from 'react-redux';
+import { useSelector, useDispatch } from 'react-redux';
 import style from './style.module.scss';
 import LinksComponent from './component/LinksComponent';
 import { BsFillPersonFill } from 'react-icons/bs';
@@ -9,29 +9,44 @@ import SocialLinksComponent from './component/SocialLinksComponent';
 import ImageComponent from './component/ImageComponent';
 import AdminDetailsComponent from './component/AdminDetailsComponent';
 import { FiMenu } from 'react-icons/fi';
+import {
+  createSocialLinkAction,
+  deleteSocialLinkAction,
+  editColorAction,
+  editNameAction,
+  editProfileAction,
+  editSocialLinkAction,
+} from '../../store/actions/AdminActions';
 export default function NavComponent() {
+  const dispatch = useDispatch();
   const colors = useSelector((state) => state.colors);
-  const { name, title, isAdmin } = useSelector((state) => state.admin);
+  const { name, title, isAdmin, profilePath } = useSelector(
+    (state) => state.admin
+  );
   const socialLinks = useSelector((state) => state.admin.socialLinks);
   const [isNavToogle, setNavToogle] = useState(false);
 
-  const profileImageSubmitHandler = () => {
+  const profileImageSubmitHandler = (values) => {
+    dispatch(editProfileAction(values.path));
+  };
+  const colorSubmitHandler = (values) => {
+    dispatch(editColorAction(values));
     return;
   };
-  const colorSubmitHandler = () => {
+  const adminDetailSubmitHandler = (values) => {
+    dispatch(editNameAction(values.name, values.title));
+  };
+  const socailSubmitHandler = (values) => {
+    dispatch(createSocialLinkAction(values));
     return;
   };
-  const adminDetailSubmitHandler = () => {
-    return;
+  const socailUpdateHandler = (values) => {
+    dispatch(editSocialLinkAction(values));
   };
-  const socailSubmitHandler = () => {
-    return;
-  };
-  const socailUpdateHandler = () => {
-    return;
-  };
-  const socailDeleteHandler = () => {
-    return;
+  const socailDeleteHandler = (id) => {
+    const isConfirm = window.confirm('Are you sure?');
+    if (!isConfirm) return;
+    dispatch(deleteSocialLinkAction(id));
   };
   const links = [
     {
@@ -82,10 +97,10 @@ export default function NavComponent() {
       <div className={style.navContainer} style={navContainerStyle}>
         <ImageComponent
           colors={colors}
-          image='./profile.jpg'
+          image={profilePath}
           isAdmin={isAdmin}
           colorSubmitHandler={colorSubmitHandler}
-          profileImageSubmitHandler={profileImageSubmitHandler}
+          submitHandler={profileImageSubmitHandler}
         />
         <AdminDetailsComponent
           colors={colors}

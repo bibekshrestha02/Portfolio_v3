@@ -1,3 +1,4 @@
+import { EDIT_COLORS } from '../constants/AdminConstants';
 const initalState = {
   primary: '#007CC7',
   navText: '#FFFFFF',
@@ -9,5 +10,12 @@ const initalState = {
 };
 
 export default function colorReducer(state = initalState, actions) {
-  return state;
+  switch (actions.type) {
+    case EDIT_COLORS:
+      return {
+        ...actions.payload.data,
+      };
+    default:
+      return state;
+  }
 }

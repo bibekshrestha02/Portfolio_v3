@@ -19,6 +19,7 @@ const SocialIconComponent = ({
     setUpdateModel((e) => !e);
   };
   const initalValues = {
+    _id: link._id,
     icon: link.icon ? link.icon : '',
     link: link.link ? link.link : '',
   };
@@ -101,11 +102,11 @@ export default function SocialLinksComponent({
             <SocialIconComponent
               isAdmin={isAdmin}
               link={link}
-              key={link.link}
+              key={link._id}
               colors={colors}
               updateHandler={updateHandler}
               validationSchema={validationSchema}
-              deleteHandler={deleteHandler}
+              deleteHandler={() => deleteHandler(link._id)}
             />
           );
         })}
