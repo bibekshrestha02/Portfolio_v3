@@ -1,6 +1,7 @@
 import {
   EDIT_ABOUT_PAGE,
   EDIT_CONTACT_PAGE,
+  LOGIN,
   // EDUCATION
   EDIT_EDUCATION_PAGE_TITLE,
   CREATE_EDUCATION,
@@ -162,6 +163,11 @@ const initailState = {
 
 export default function mainReducer(state = initailState, actions) {
   switch (actions.type) {
+    case LOGIN:
+      return {
+        ...state,
+        isAdmin: actions.payload.isAdmin,
+      };
     case EDIT_ABOUT_PAGE:
       return {
         ...state,

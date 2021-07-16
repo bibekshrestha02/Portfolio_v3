@@ -1,5 +1,6 @@
 export const EDIT_ABOUT_PAGE = 'EDIT_ABOUT_PAGE';
 export const EDIT_CONTACT_PAGE = 'EDIT_CONTACT_PAGE';
+export const LOGIN = 'LOGIN';
 // Education Page Constants
 export const EDIT_EDUCATION_PAGE_TITLE = 'EDIT_EDUCATION_PAGE_TITLE';
 export const CREATE_EDUCATION = 'CREATE_EDUCATION';
