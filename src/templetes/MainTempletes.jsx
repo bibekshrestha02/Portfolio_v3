@@ -3,18 +3,19 @@ import { useSelector } from 'react-redux';
 import NavComponent from '../components/Nav/NavComponent';
 import style from './style.module.scss';
 export default function MainTempletes({ children }) {
-  const { pageBackground, primary } = useSelector((state) => state.colors);
-  const container = {
-    backgroundColor: pageBackground,
-  };
-  const bodyContainer = {
-    border: `2px solid ${primary}`,
-  };
+  const { pageBackground, primary, screenBackground } = useSelector(
+    (state) => state.colors
+  );
+
   return (
-    <div className={style.mainTempleteContainer} style={container}>
-      <div className={style.bodyContainer} style={bodyContainer}>
+    <div
+      className={style.mainTempleteContainer}
+      style={{ backgroundColor: pageBackground }}>
+      <div
+        className={style.bodyContainer}
+        style={{ border: `2px solid ${primary}` }}>
         <NavComponent />
-        {children}
+        <div style={{ backgroundColor: screenBackground }}>{children}</div>
       </div>
     </div>
   );
