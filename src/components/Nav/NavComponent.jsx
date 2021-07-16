@@ -1,14 +1,14 @@
 import React, { useState } from 'react';
-import { useSelector, useDispatch } from 'react-redux';
-import style from './style.module.scss';
-import LinksComponent from './component/LinksComponent';
+import { FiMenu } from 'react-icons/fi';
 import { BsFillPersonFill } from 'react-icons/bs';
 import { BiCube, BiBookAlt, BiMessageRoundedDots } from 'react-icons/bi';
 import { FaProjectDiagram } from 'react-icons/fa';
+import { useSelector, useDispatch } from 'react-redux';
+import style from './style.module.scss';
+import LinksComponent from './component/LinksComponent';
 import SocialLinksComponent from './component/SocialLinksComponent';
 import ImageComponent from './component/ImageComponent';
 import AdminDetailsComponent from './component/AdminDetailsComponent';
-import { FiMenu } from 'react-icons/fi';
 import {
   createSocialLinkAction,
   deleteSocialLinkAction,
@@ -17,6 +17,7 @@ import {
   editProfileAction,
   editSocialLinkAction,
 } from '../../store/actions/AdminActions';
+import { logout } from '../../store/actions/authActions';
 export default function NavComponent() {
   const dispatch = useDispatch();
   const colors = useSelector((state) => state.colors);
@@ -47,6 +48,13 @@ export default function NavComponent() {
     const isConfirm = window.confirm('Are you sure?');
     if (!isConfirm) return;
     dispatch(deleteSocialLinkAction(id));
+  };
+  const logoutHandler = () => {
+    const isConfirm = window.confirm('Are you sure?');
+    if (!isConfirm) {
+      return;
+    }
+    dispatch(logout());
   };
   const links = [
     {
@@ -81,7 +89,12 @@ export default function NavComponent() {
   };
   let linksContainer = (
     <div className={style.linkWraper}>
-      <LinksComponent links={links} colors={colors} />
+      <LinksComponent
+        links={links}
+        colors={colors}
+        logoutHandler={logoutHandler}
+        isAdmin={isAdmin}
+      />
       <SocialLinksComponent
         socialLinks={socialLinks}
         isAdmin={isAdmin}

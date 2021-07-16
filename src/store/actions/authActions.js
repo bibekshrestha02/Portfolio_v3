@@ -25,3 +25,15 @@ export const login = (userID, accessToken) => {
     });
   };
 };
+
+export const logout = () => {
+  return async (dispatch) => {
+    localStorage.removeItem('token');
+    dispatch({
+      type: LOGIN,
+      payload: {
+        isAdmin: false,
+      },
+    });
+  };
+};
