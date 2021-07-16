@@ -12,7 +12,7 @@ const ContactScreen = lazy(() => import('./screens/ContactScreen'));
 const EducationScreen = lazy(() => import('./screens/EducationScreen'));
 const ProjectsScreen = lazy(() => import('./screens/ProjectsScreen'));
 const SkillScreen = lazy(() => import('./screens/SkillScreen'));
-
+const LoginScreen = lazy(() => import('./screens/LoginScreen'));
 function App() {
   const reducers = combineReducers({
     colors: ColorsReducer,
@@ -30,6 +30,7 @@ function App() {
               <Route path='/educations' component={EducationScreen} />
               <Route path='/projects' component={ProjectsScreen} />
               <Route path='/skills' component={SkillScreen} />
+              <Route path='/login' component={LoginScreen} />
               <Route path='*' component={AboutScreen} />
             </Switch>
           </Suspense>
