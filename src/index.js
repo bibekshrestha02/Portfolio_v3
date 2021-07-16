@@ -4,10 +4,23 @@ import './index.css';
 import App from './App';
 import * as serviceWorkerRegistration from './serviceWorkerRegistration';
 import reportWebVitals from './reportWebVitals';
+import { Provider } from 'react-redux';
+import { createStore, combineReducers, applyMiddleware } from 'redux';
+import ReduxThunk from 'redux-thunk';
+import ColorsReducer from './store/reducers/ColorsReducer';
+import AdminReducer from './store/reducers/AdminReducer';
+
+const reducers = combineReducers({
+  colors: ColorsReducer,
+  admin: AdminReducer,
+});
+const store = createStore(reducers, applyMiddleware(ReduxThunk));
 
 ReactDOM.render(
   <React.StrictMode>
-    <App />
+    <Provider store={store}>
+      <App />
+    </Provider>
   </React.StrictMode>,
   document.getElementById('root')
 );
