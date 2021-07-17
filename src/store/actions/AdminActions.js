@@ -1,4 +1,10 @@
+import axios from '../../AxiosInstance';
 import {
+  FETCH_ABOUT,
+  FETCH_CONTACT,
+  FETCH_EDUCATION,
+  FETCH_PROJECT,
+  FETCH_SKILL,
   EDIT_ABOUT_PAGE,
   EDIT_CONTACT_PAGE,
   EDIT_EDUCATION_PAGE_TITLE,
@@ -19,7 +25,24 @@ import {
   EDIT_SOCIAL_lINK,
   DELETE_SOCIAL_lINK,
   CREATE_SOCIAL_lINK,
+  INITIAL_FETCH,
 } from '../constants/AdminConstants';
+export function initalFetchAction() {
+  return async (dispatch) => {
+    const { data } = await axios.get('/');
+    const { name, title, profileImagePath, socialLinks, colors } = data;
+    dispatch({
+      type: INITIAL_FETCH,
+      payload: {
+        name,
+        title,
+        profileImagePath,
+        socialLinks,
+        colors,
+      },
+    });
+  };
+}
 export function editAboutPageAction(data) {
   return (dispatch) => {
     dispatch({
@@ -30,17 +53,28 @@ export function editAboutPageAction(data) {
     });
   };
 }
-export function editContactPageAction(data) {
-  return (dispatch) => {
+
+// ABOUT PAGE ACTIONS
+export function aboutFetchAction() {
+  return async (dispatch) => {
+    const { data } = await axios.get('/about');
+
     dispatch({
-      type: EDIT_CONTACT_PAGE,
-      payload: {
-        data,
-      },
+      type: FETCH_ABOUT,
+      payload: { data },
     });
   };
 }
 // EDUCATION PAGE ACTIONS
+export function educationFetchAction() {
+  return async (dispatch) => {
+    const { data } = await axios.get('/education/');
+    dispatch({
+      type: FETCH_EDUCATION,
+      payload: { data },
+    });
+  };
+}
 export function editEducationTitlePageAction(title) {
   return (dispatch) => {
     dispatch({
@@ -82,6 +116,15 @@ export function deleteEducationAction(id) {
   };
 }
 // PROJECT PAGE ACTIONS
+export function projectFetchAction() {
+  return async (dispatch) => {
+    const { data } = await axios.get('/project/');
+    dispatch({
+      type: FETCH_PROJECT,
+      payload: { data },
+    });
+  };
+}
 export function editProjectTitlePageAction(title) {
   return (dispatch) => {
     dispatch({
@@ -123,6 +166,15 @@ export function deleteProjectAction(id) {
   };
 }
 // SKILL PAGE ACTIONS
+export function skillFetchAction() {
+  return async (dispatch) => {
+    const { data } = await axios.get('/skill/');
+    dispatch({
+      type: FETCH_SKILL,
+      payload: { data },
+    });
+  };
+}
 export function editSkillTitlePageAction(title) {
   return (dispatch) => {
     dispatch({
@@ -224,6 +276,27 @@ export function deleteSocialLinkAction(id) {
       type: DELETE_SOCIAL_lINK,
       payload: {
         id,
+      },
+    });
+  };
+}
+// CONTACT PAGE ACTIONS
+export function contactFetchAction() {
+  return async (dispatch) => {
+    const { data } = await axios.get('/contact/');
+    dispatch({
+      type: FETCH_CONTACT,
+      payload: { data },
+    });
+  };
+}
+
+export function editContactPageAction(data) {
+  return (dispatch) => {
+    dispatch({
+      type: EDIT_CONTACT_PAGE,
+      payload: {
+        data,
       },
     });
   };

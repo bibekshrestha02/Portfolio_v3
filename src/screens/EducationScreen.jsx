@@ -5,22 +5,24 @@ import EducationDetailsCompoent from '../components/EducationDetailsCompoent';
 import LoadingComponent from '../components/LoadingComponent';
 import MyTextInput from '../components/MyInputsCompoenent/MyTextInput';
 import * as yup from 'yup';
+import FetchInitalApi from '../templetes/FetchInitalApi';
 import {
   editEducationTitlePageAction,
   createEducationAction,
   editEducationAction,
   deleteEducationAction,
+  educationFetchAction,
 } from '../store/actions/AdminActions';
 const ModelComponent = lazy(() => import('../components/ModelComponent'));
 export default function EducationScreen() {
   const [isPageEdit, setPageEdit] = React.useState(false);
   const [isCreateModel, setCreateModel] = React.useState(false);
-  const education = useSelector((state) => state.admin.education);
+  const { title, data } = useSelector((state) => state.admin.education);
   const { isAdmin } = useSelector((state) => state.admin);
   const colors = useSelector((state) => state.colors);
   const dispatch = useDispatch();
   const pageValue = {
-    title: education.title ? education.title : '',
+    title: title ? title : '',
   };
   const initalValue = {
     name: '',
@@ -66,81 +68,83 @@ export default function EducationScreen() {
     dispatch(deleteEducationAction(id));
   };
   return (
-    <Suspense fallback={<LoadingComponent />}>
-      <ScreenTemplete
-        title={education.title}
-        editHandler={pageModelToggler}
-        isCreateButton
-        createHandler={createModelToggler}>
-        {education.courses.map((course) => {
-          return (
-            <EducationDetailsCompoent
-              colors={colors}
-              isAdmin={isAdmin}
-              key={course._id}
-              course={course}
+    <FetchInitalApi action={educationFetchAction} name='education'>
+      <Suspense fallback={<LoadingComponent />}>
+        <ScreenTemplete
+          title={title}
+          editHandler={pageModelToggler}
+          isCreateButton
+          createHandler={createModelToggler}>
+          {data.map((course) => {
+            return (
+              <EducationDetailsCompoent
+                colors={colors}
+                isAdmin={isAdmin}
+                key={course._id}
+                course={course}
+                validationSchema={validationSchema}
+                updateHandler={editHandler}
+                deleteHandler={deleteHandler}
+              />
+            );
+          })}
+          {isPageEdit && (
+            <ModelComponent
+              title='Edit Page'
+              closeHandler={pageModelToggler}
+              initalValues={pageValue}
+              validationSchema={pageValidationSchema}
+              submitHandler={pageSubmitHandler}>
+              {() => {
+                return (
+                  <>
+                    <MyTextInput
+                      name='title'
+                      label='Title'
+                      placeholder='Enter Title'
+                    />
+                  </>
+                );
+              }}
+            </ModelComponent>
+          )}
+          {isCreateModel && (
+            <ModelComponent
+              title='Add Education'
+              closeHandler={createModelToggler}
+              initalValues={initalValue}
               validationSchema={validationSchema}
-              updateHandler={editHandler}
-              deleteHandler={deleteHandler}
-            />
-          );
-        })}
-        {isPageEdit && (
-          <ModelComponent
-            title='Edit Page'
-            closeHandler={pageModelToggler}
-            initalValues={pageValue}
-            validationSchema={pageValidationSchema}
-            submitHandler={pageSubmitHandler}>
-            {() => {
-              return (
-                <>
-                  <MyTextInput
-                    name='title'
-                    label='Title'
-                    placeholder='Enter Title'
-                  />
-                </>
-              );
-            }}
-          </ModelComponent>
-        )}
-        {isCreateModel && (
-          <ModelComponent
-            title='Add Education'
-            closeHandler={createModelToggler}
-            initalValues={initalValue}
-            validationSchema={validationSchema}
-            submitHandler={createHandler}>
-            {() => {
-              return (
-                <>
-                  <MyTextInput
-                    name='name'
-                    label='Name'
-                    placeholder='Enter Name'
-                  />
-                  <MyTextInput
-                    name='place'
-                    label='Place'
-                    placeholder='Enter Place'
-                  />
-                  <MyTextInput
-                    name='year'
-                    label='Year'
-                    placeholder='Enter Year'
-                  />
-                  <MyTextInput
-                    name='branch'
-                    label='Branch'
-                    placeholder='Enter Branch'
-                  />
-                </>
-              );
-            }}
-          </ModelComponent>
-        )}
-      </ScreenTemplete>
-    </Suspense>
+              submitHandler={createHandler}>
+              {() => {
+                return (
+                  <>
+                    <MyTextInput
+                      name='name'
+                      label='Name'
+                      placeholder='Enter Name'
+                    />
+                    <MyTextInput
+                      name='place'
+                      label='Place'
+                      placeholder='Enter Place'
+                    />
+                    <MyTextInput
+                      name='year'
+                      label='Year'
+                      placeholder='Enter Year'
+                    />
+                    <MyTextInput
+                      name='branch'
+                      label='Branch'
+                      placeholder='Enter Branch'
+                    />
+                  </>
+                );
+              }}
+            </ModelComponent>
+          )}
+        </ScreenTemplete>
+      </Suspense>
+    </FetchInitalApi>
   );
 }

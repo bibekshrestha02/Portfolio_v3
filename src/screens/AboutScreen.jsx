@@ -7,7 +7,12 @@ import ModelComponent from '../components/ModelComponent';
 import MyTextInput from '../components/MyInputsCompoenent/MyTextInput';
 import MyTextArea from '../components/MyInputsCompoenent/MyTextArea';
 import * as yup from 'yup';
-import { editAboutPageAction } from '../store/actions/AdminActions';
+import {
+  editAboutPageAction,
+  aboutFetchAction,
+} from '../store/actions/AdminActions';
+import FetchInitalApi from '../templetes/FetchInitalApi';
+
 export default function AboutScreen() {
   const [isEditModel, setEditModel] = React.useState(false);
   const dispatch = useDispatch();
@@ -41,47 +46,49 @@ export default function AboutScreen() {
     }
   };
   return (
-    <ScreenTemplete title={title} editHandler={editModalHandler}>
-      <div className={style.aboutScreenContainer}>
-        <p className={style.subTitle}>{subTitle}</p>
-        <p className={style.description}>{description}</p>
-        <ButtonAssets title='Download My CV' />
-      </div>
-      {isEditModel && (
-        <ModelComponent
-          title='Edit Page'
-          closeHandler={editModalHandler}
-          initalValues={initalValue}
-          validationSchema={validationSchema}
-          submitHandler={submitHandler}>
-          {() => {
-            return (
-              <>
-                <MyTextInput
-                  name='title'
-                  label='Title'
-                  placeholder='Enter Title'
-                />
-                <MyTextInput
-                  name='subTitle'
-                  label='Sub Title'
-                  placeholder='Enter Sub-Title'
-                />
-                <MyTextInput
-                  name='cvPath'
-                  label='CV Path'
-                  placeholder='Enter CV Path'
-                />
-                <MyTextArea
-                  name='description'
-                  label='Description'
-                  placeholder='Enter Description'
-                />
-              </>
-            );
-          }}
-        </ModelComponent>
-      )}
-    </ScreenTemplete>
+    <FetchInitalApi action={aboutFetchAction} name='about'>
+      <ScreenTemplete title={title} editHandler={editModalHandler}>
+        <div className={style.aboutScreenContainer}>
+          <p className={style.subTitle}>{subTitle}</p>
+          <p className={style.description}>{description}</p>
+          <ButtonAssets title='Download My CV' />
+        </div>
+        {isEditModel && (
+          <ModelComponent
+            title='Edit Page'
+            closeHandler={editModalHandler}
+            initalValues={initalValue}
+            validationSchema={validationSchema}
+            submitHandler={submitHandler}>
+            {() => {
+              return (
+                <>
+                  <MyTextInput
+                    name='title'
+                    label='Title'
+                    placeholder='Enter Title'
+                  />
+                  <MyTextInput
+                    name='subTitle'
+                    label='Sub Title'
+                    placeholder='Enter Sub-Title'
+                  />
+                  <MyTextInput
+                    name='cvPath'
+                    label='CV Path'
+                    placeholder='Enter CV Path'
+                  />
+                  <MyTextArea
+                    name='description'
+                    label='Description'
+                    placeholder='Enter Description'
+                  />
+                </>
+              );
+            }}
+          </ModelComponent>
+        )}
+      </ScreenTemplete>
+    </FetchInitalApi>
   );
 }
