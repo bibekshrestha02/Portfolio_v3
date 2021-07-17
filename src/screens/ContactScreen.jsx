@@ -11,7 +11,7 @@ import {
   contactFetchAction,
 } from '../store/actions/AdminActions';
 import FetchInitalApi from '../templetes/FetchInitalApi';
-
+import { createMessageAction } from '../store/actions/MessageActions';
 export default function ContactScreen() {
   const [isEditModel, setEditModel] = React.useState(false);
   const dispatch = useDispatch();
@@ -35,11 +35,17 @@ export default function ContactScreen() {
     subDetail: yup.string().min(4).max(500).required(),
     email: yup.string().email().required(),
   });
-  const submitHandler = (values, { setSubmitting }) => {
-    setSubmitting(true);
-    console.log(values);
-    dispatch(editContactPageAction(values));
-    setSubmitting(false);
+  const submitHandler = async (values, { setSubmitting }) => {
+    try {
+      setSubmitting(true);
+      await dispatch(editContactPageAction(values));
+      dispatch(createMessageAction('Successfully Updated!', 'warning'));
+      setSubmitting(false);
+    } catch (error) {
+      console.log(error);
+      dispatch(createMessageAction('Something Went Wrong!', 'error'));
+      setSubmitting(false);
+    }
   };
   return (
     <FetchInitalApi action={contactFetchAction} name='contact'>

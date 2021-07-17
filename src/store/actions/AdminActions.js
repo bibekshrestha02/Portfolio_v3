@@ -305,7 +305,8 @@ export function contactFetchAction() {
 }
 
 export function editContactPageAction(data) {
-  return (dispatch) => {
+  return async (dispatch) => {
+    await axios.put('/contact', data);
     dispatch({
       type: EDIT_CONTACT_PAGE,
       payload: {
