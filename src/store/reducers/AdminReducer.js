@@ -64,7 +64,7 @@ export default function mainReducer(state = initailState, actions) {
         ...state,
         name: actions.payload.name,
         title: actions.payload.title,
-        profilePath: actions.payload.profilePath,
+        profilePath: actions.payload.profileImagePath,
         socialLinks: actions.payload.socialLinks,
       };
     case FETCH_ABOUT:
