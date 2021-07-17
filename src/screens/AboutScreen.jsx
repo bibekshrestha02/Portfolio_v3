@@ -11,6 +11,7 @@ import {
   editAboutPageAction,
   aboutFetchAction,
 } from '../store/actions/AdminActions';
+import { createMessageAction } from '../store/actions/MessageActions';
 import FetchInitalApi from '../templetes/FetchInitalApi';
 
 export default function AboutScreen() {
@@ -39,10 +40,12 @@ export default function AboutScreen() {
     try {
       setSubmitting(true);
       await dispatch(editAboutPageAction(values));
+      dispatch(createMessageAction('Successfully Updated!', 'warning'));
       setSubmitting(false);
-      alert('Sucess!');
     } catch (error) {
+      setSubmitting(false);
       console.log(error);
+      dispatch(createMessageAction('Successfully Updated!', 'warning'));
     }
   };
   return (

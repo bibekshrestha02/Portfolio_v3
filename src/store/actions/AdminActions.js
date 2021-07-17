@@ -43,16 +43,6 @@ export function initalFetchAction() {
     });
   };
 }
-export function editAboutPageAction(data) {
-  return (dispatch) => {
-    dispatch({
-      type: EDIT_ABOUT_PAGE,
-      payload: {
-        data,
-      },
-    });
-  };
-}
 
 // ABOUT PAGE ACTIONS
 export function aboutFetchAction() {
@@ -62,6 +52,17 @@ export function aboutFetchAction() {
     dispatch({
       type: FETCH_ABOUT,
       payload: { data },
+    });
+  };
+}
+export function editAboutPageAction(data) {
+  return async (dispatch) => {
+    await axios.put('/about', data);
+    dispatch({
+      type: EDIT_ABOUT_PAGE,
+      payload: {
+        data,
+      },
     });
   };
 }
