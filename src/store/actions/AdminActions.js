@@ -217,7 +217,8 @@ export function deleteSkillAction(id) {
 }
 // EDIT NAME
 export function editNameAction(name, title) {
-  return (dispatch) => {
+  return async (dispatch) => {
+    await axios.put('/name', { name, title });
     dispatch({
       type: EDIT_NAME,
       payload: {
@@ -229,7 +230,8 @@ export function editNameAction(name, title) {
 }
 // EDIT PROFILE
 export function editProfileAction(path) {
-  return (dispatch) => {
+  return async (dispatch) => {
+    await axios.put('/profileImage', { profileImagePath: path });
     dispatch({
       type: EDIT_PROFILE,
       payload: {

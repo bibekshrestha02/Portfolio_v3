@@ -28,8 +28,16 @@ export default function NavComponent() {
   const socialLinks = useSelector((state) => state.admin.socialLinks);
   const [isNavToogle, setNavToogle] = useState(false);
 
-  const profileImageSubmitHandler = (values) => {
-    dispatch(editProfileAction(values.path));
+  const profileImageSubmitHandler = async (values, { setSubmitting }) => {
+    try {
+      setSubmitting(true);
+      await dispatch(editProfileAction(values.path));
+      dispatch(createMessageAction('Successfully Changed', 'warning'));
+      setSubmitting(false);
+    } catch (error) {
+      dispatch(createMessageAction('Something Went Wrong!', 'error'));
+      setSubmitting(false);
+    }
   };
   const colorSubmitHandler = (values) => {
     dispatch(editColorAction(values));
