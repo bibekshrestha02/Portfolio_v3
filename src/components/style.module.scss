@@ -215,3 +215,29 @@
 .icon {
   cursor: pointer;
 }
+
+.messageBox {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  width: auto;
+  min-width: 200px;
+  min-height: 30px;
+  position: absolute;
+  cursor: pointer;
+  top: 2;
+  z-index: 5;
+  left: 60%;
+  color: white;
+  font-size: 16px;
+  font-weight: 'bold';
+  border-radius: 5px;
+  padding: 5px;
+  @media screen and (max-width: $tabWidth) {
+    left: 45%;
+  }
+  @media screen and (max-width: $mobileWidth) {
+    left: 25%;
+    min-width: 150px;
+  }
+}

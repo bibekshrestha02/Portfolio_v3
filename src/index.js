@@ -9,10 +9,12 @@ import { createStore, combineReducers, applyMiddleware } from 'redux';
 import ReduxThunk from 'redux-thunk';
 import ColorsReducer from './store/reducers/ColorsReducer';
 import AdminReducer from './store/reducers/AdminReducer';
+import ErrorReducer from './store/reducers/ErrorReducer';
 
 const reducers = combineReducers({
   colors: ColorsReducer,
   admin: AdminReducer,
+  error: ErrorReducer,
 });
 const store = createStore(reducers, applyMiddleware(ReduxThunk));
 
