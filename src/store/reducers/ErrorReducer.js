@@ -1,6 +1,6 @@
 import { CREATE_ERROR, REMOVE_ERROR } from '../constants/ErrorConstants';
 const initalState = {
-  message: 'Successfully Created!',
+  message: '',
   status: '',
 };
 
