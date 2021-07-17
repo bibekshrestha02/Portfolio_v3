@@ -14,6 +14,7 @@ import {
   editSkillAction,
   skillFetchAction,
 } from '../store/actions/AdminActions';
+import { createMessageAction } from '../store/actions/MessageActions';
 const ModelComponent = lazy(() => import('../components/ModelComponent'));
 
 export default function SkillScreen() {
@@ -45,9 +46,19 @@ export default function SkillScreen() {
     setPageEdit((e) => !e);
     return;
   };
-  const editPageSubmitHandler = (values) => {
-    dispatch(editSkillTitlePageAction(values.title));
+
+  const editPageSubmitHandler = async (values, { setSubmitting }) => {
+    try {
+      setSubmitting(true);
+      await dispatch(editSkillTitlePageAction(values.title));
+      dispatch(createMessageAction('Successfully Updated!', 'warning'));
+      setSubmitting(false);
+    } catch (error) {
+      console.log(error);
+      setSubmitting(false);
+    }
   };
+
   const createSubmitHandler = (values) => {
     dispatch(createSkillAction(values));
   };

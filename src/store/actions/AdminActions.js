@@ -77,7 +77,9 @@ export function educationFetchAction() {
   };
 }
 export function editEducationTitlePageAction(title) {
-  return (dispatch) => {
+  return async (dispatch) => {
+    await axios.put('/education/title', { title });
+
     dispatch({
       type: EDIT_EDUCATION_PAGE_TITLE,
       payload: {
@@ -127,7 +129,9 @@ export function projectFetchAction() {
   };
 }
 export function editProjectTitlePageAction(title) {
-  return (dispatch) => {
+  return async (dispatch) => {
+    await axios.put('/project/title', { title });
+
     dispatch({
       type: EDIT_PROJECT_PAGE_TITLE,
       payload: {
@@ -177,7 +181,9 @@ export function skillFetchAction() {
   };
 }
 export function editSkillTitlePageAction(title) {
-  return (dispatch) => {
+  return async (dispatch) => {
+    await axios.put('/skill/title', { title });
+
     dispatch({
       type: EDIT_SKILL_PAGE_TITLE,
       payload: {

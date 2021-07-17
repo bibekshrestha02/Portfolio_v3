@@ -13,6 +13,8 @@ import {
   deleteEducationAction,
   educationFetchAction,
 } from '../store/actions/AdminActions';
+import { createMessageAction } from '../store/actions/MessageActions';
+
 const ModelComponent = lazy(() => import('../components/ModelComponent'));
 export default function EducationScreen() {
   const [isPageEdit, setPageEdit] = React.useState(false);
@@ -47,11 +49,15 @@ export default function EducationScreen() {
     setCreateModel((e) => !e);
     return;
   };
-  const pageSubmitHandler = (values) => {
+  const pageSubmitHandler = async (values, { setSubmitting }) => {
     try {
-      dispatch(editEducationTitlePageAction(values.title));
+      setSubmitting(true);
+      await dispatch(editEducationTitlePageAction(values.title));
+      dispatch(createMessageAction('Successfully Updated!', 'warning'));
+      setSubmitting(false);
     } catch (error) {
       console.log(error);
+      setSubmitting(false);
     }
   };
   const createHandler = (values) => {

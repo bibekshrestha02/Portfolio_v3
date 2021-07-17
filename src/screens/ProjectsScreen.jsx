@@ -14,6 +14,7 @@ import {
   editProjectAction,
   projectFetchAction,
 } from '../store/actions/AdminActions';
+import { createMessageAction } from '../store/actions/MessageActions';
 const ModelComponent = React.lazy(() => import('../components/ModelComponent'));
 export default function ProjectsScreen() {
   const dispatch = useDispatch();
@@ -47,12 +48,18 @@ export default function ProjectsScreen() {
     return;
   };
   const projectSubmitHandler = (values) => {
-    console.log(values);
     dispatch(createProjectAction(values));
   };
-  const editPageSubmitHandler = (values) => {
-    dispatch(editProjectTitlePageAction(values.title));
-    console.log(values.title);
+  const editPageSubmitHandler = async (values, { setSubmitting }) => {
+    try {
+      setSubmitting(true);
+      await dispatch(editProjectTitlePageAction(values.title));
+      dispatch(createMessageAction('Successfully Updated!', 'warning'));
+      setSubmitting(false);
+    } catch (error) {
+      console.log(error);
+      setSubmitting(false);
+    }
   };
   const updateHandler = (values) => {
     dispatch(editProjectAction(values));
