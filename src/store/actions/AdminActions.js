@@ -89,17 +89,20 @@ export function editEducationTitlePageAction(title) {
   };
 }
 export function createEducationAction(data) {
-  return (dispatch) => {
+  return async (dispatch) => {
+    const res = await axios.post('/education/', data);
     dispatch({
       type: CREATE_EDUCATION,
       payload: {
-        data,
+        data: res.data,
       },
     });
   };
 }
 export function editEducationAction(data) {
-  return (dispatch) => {
+  return async (dispatch) => {
+    await axios.put(`/education/${data._id}`, data);
+
     dispatch({
       type: EDIT_EDUCATION,
       payload: {
@@ -109,7 +112,8 @@ export function editEducationAction(data) {
   };
 }
 export function deleteEducationAction(id) {
-  return (dispatch) => {
+  return async (dispatch) => {
+    await axios.delete(`/education/${id}`);
     dispatch({
       type: DELETE_EDUCATION,
       payload: {

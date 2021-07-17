@@ -29,13 +29,13 @@ export default function EducationScreen() {
   const initalValue = {
     name: '',
     place: '',
-    year: '',
+    year: 0,
     branch: '',
   };
   const validationSchema = yup.object({
     name: yup.string().min(3).max(100).required(),
     place: yup.string().min(4).max(100).required(),
-    year: yup.string().min(4).max(100),
+    year: yup.number().required('Year must be 0 or Number'),
     branch: yup.string().min(2).max(100).required(),
   });
   const pageValidationSchema = yup.object({
@@ -58,20 +58,49 @@ export default function EducationScreen() {
     } catch (error) {
       console.log(error);
       setSubmitting(false);
+      dispatch(createMessageAction('Something Went Wrong', 'error'));
     }
   };
-  const createHandler = (values) => {
-    dispatch(createEducationAction(values));
+
+  const createHandler = async (values, { setSubmitting }) => {
+    try {
+      setSubmitting(true);
+      await dispatch(createEducationAction(values));
+
+      dispatch(createMessageAction('Successfully Created!', 'warning'));
+      setSubmitting(false);
+    } catch (error) {
+      console.log(error);
+      dispatch(createMessageAction('Something Went Wrong', 'error'));
+      setSubmitting(false);
+    }
   };
-  const editHandler = (values) => {
-    dispatch(editEducationAction(values));
+
+  const editHandler = async (values, { setSubmitting }) => {
+    try {
+      console.log(values);
+      setSubmitting(true);
+      await dispatch(editEducationAction(values));
+      dispatch(createMessageAction('Successfully Updated!', 'warning'));
+      setSubmitting(false);
+    } catch (error) {
+      console.log(error.response);
+      dispatch(createMessageAction('Something Went Wrong', 'error'));
+      setSubmitting(false);
+    }
   };
-  const deleteHandler = (id) => {
+  const deleteHandler = async (id) => {
     let isConfirm = window.confirm('Are you sure?');
     if (!isConfirm) {
       return;
     }
-    dispatch(deleteEducationAction(id));
+    try {
+      await dispatch(deleteEducationAction(id));
+      dispatch(createMessageAction('Successfully Deleted!', 'warning'));
+    } catch (error) {
+      console.log(error);
+      dispatch(createMessageAction('Something Went Wrong', 'error'));
+    }
   };
   return (
     <FetchInitalApi action={educationFetchAction} name='education'>

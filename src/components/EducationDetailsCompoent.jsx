@@ -49,7 +49,9 @@ export default function EducationDetailsCompoent({
               />
             </div>
           )}
-          <span>{course.year ? course.year : 'running'}</span>
+          <span>
+            {course.year === '0' || !course.year ? 'running' : course.year}
+          </span>
         </div>
       </div>
       {isUpdateModel && (

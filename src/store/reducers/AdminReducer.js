@@ -102,11 +102,11 @@ export default function mainReducer(state = initailState, actions) {
         ...state,
         education: {
           ...state.education,
-          courses: state.education.courses.concat(actions.payload.data),
+          data: state.education.data.concat(actions.payload.data),
         },
       };
     case EDIT_EDUCATION:
-      let allCourses = state.education.courses;
+      let allCourses = state.education.data;
       let courseIndex = allCourses.findIndex(
         (e) => e._id === actions.payload.data._id
       );
@@ -115,18 +115,18 @@ export default function mainReducer(state = initailState, actions) {
         ...state,
         education: {
           ...state.education,
-          courses: allCourses,
+          data: allCourses,
         },
       };
     case DELETE_EDUCATION:
-      let courses = state.education.courses.filter(
+      let courses = state.education.data.filter(
         (e) => e._id !== actions.payload.id
       );
       return {
         ...state,
         education: {
           ...state.education,
-          courses: courses,
+          data: courses,
         },
       };
     // skills actions
