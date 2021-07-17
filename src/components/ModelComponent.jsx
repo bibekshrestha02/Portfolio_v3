@@ -40,7 +40,7 @@ export default function ModelComponent({
                   <ButtonAssets
                     title='Submit'
                     styles={{ width: '100%' }}
-                    // isSubmitting={isSubmitting}
+                    isSubmitting={isSubmitting}
                   />
                 </div>
               </div>
