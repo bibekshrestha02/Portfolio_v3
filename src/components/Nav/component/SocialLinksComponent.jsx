@@ -20,8 +20,9 @@ const SocialIconComponent = ({
   };
   const initalValues = {
     _id: link._id,
-    icon: link.icon ? link.icon : '',
-    link: link.link ? link.link : '',
+    name: link.name,
+    iconPath: link.iconPath,
+    link: link.link,
   };
   return (
     <div>
@@ -41,7 +42,7 @@ const SocialIconComponent = ({
           </div>
         )}
         <a href={link.link} target='_blank' rel='noreferrer'>
-          <img src={link.icon} alt='icon' className={style.icon} />
+          <img src={link.iconPath} alt='icon' className={style.icon} />
         </a>
       </div>
       {isUpdateModel && (
@@ -54,12 +55,18 @@ const SocialIconComponent = ({
           {(values) => {
             return (
               <>
-                <ImageAssets path={values.icon} />
+                <ImageAssets path={values.iconPath} />
                 <MyTextInput
                   placeholder='Paste Icon Path'
                   type='text'
                   label='Icon Path'
-                  name='icon'
+                  name='iconPath'
+                />
+                <MyTextInput
+                  placeholder='Enter Name'
+                  type='text'
+                  label='Name'
+                  name='name'
                 />
                 <MyTextInput
                   placeholder='Paste Social Link'
@@ -86,13 +93,15 @@ export default function SocialLinksComponent({
   const [isCreateModel, setCreateModel] = useState(false);
   const createModelToggler = () => setCreateModel((e) => !e);
   const initalValues = {
-    icon: '',
+    iconPath: '',
     link: '',
+    name: '',
   };
 
   const validationSchema = Yup.object({
-    icon: Yup.string().required(),
+    iconPath: Yup.string().required(),
     link: Yup.string().required(),
+    name: Yup.string().required(),
   });
   return (
     <div>
@@ -131,12 +140,18 @@ export default function SocialLinksComponent({
           {(values) => {
             return (
               <>
-                <ImageAssets path={values.path} />
+                <ImageAssets path={values.iconPath} />
+                <MyTextInput
+                  placeholder='Enter Name'
+                  type='text'
+                  label='Name'
+                  name='name'
+                />
                 <MyTextInput
                   placeholder='Paste Icon Path'
                   type='text'
                   label='Icon Path'
-                  name='icon'
+                  name='iconPath'
                 />
                 <MyTextInput
                   placeholder='Paste Social Link'

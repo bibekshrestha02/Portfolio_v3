@@ -253,7 +253,8 @@ export function editColorAction(data) {
 }
 // SOCAIL LINKS
 export function createSocialLinkAction(data) {
-  return (dispatch) => {
+  return async (dispatch) => {
+    await axios.post('/socialLink/', data);
     dispatch({
       type: CREATE_SOCIAL_lINK,
       payload: {
@@ -263,7 +264,9 @@ export function createSocialLinkAction(data) {
   };
 }
 export function editSocialLinkAction(data) {
-  return (dispatch) => {
+  return async (dispatch) => {
+    const { _id, iconPath, name, link } = data;
+    await axios.put(`/socialLink/${_id}`, { iconPath, name, link });
     dispatch({
       type: EDIT_SOCIAL_lINK,
       payload: {
@@ -273,7 +276,8 @@ export function editSocialLinkAction(data) {
   };
 }
 export function deleteSocialLinkAction(id) {
-  return (dispatch) => {
+  return async (dispatch) => {
+    await axios.delete(`/socialLink/${id}`);
     dispatch({
       type: DELETE_SOCIAL_lINK,
       payload: {

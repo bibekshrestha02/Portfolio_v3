@@ -52,17 +52,37 @@ export default function NavComponent() {
       dispatch(createMessageAction('Something Went Wrong!', 'error'));
     }
   };
-  const socailSubmitHandler = (values) => {
-    dispatch(createSocialLinkAction(values));
-    return;
+  const socialSubmitHandler = async (values, { setSubmitting }) => {
+    try {
+      setSubmitting(true);
+      await dispatch(createSocialLinkAction(values));
+      dispatch(createMessageAction('Successfully Created', 'warning'));
+      setSubmitting(false);
+    } catch (error) {
+      dispatch(createMessageAction('Something Went Wrong!', 'error'));
+      setSubmitting(false);
+    }
   };
-  const socailUpdateHandler = (values) => {
-    dispatch(editSocialLinkAction(values));
+  const socialUpdateHandler = async (values, { setSubmitting }) => {
+    try {
+      setSubmitting(true);
+      await dispatch(editSocialLinkAction(values));
+      dispatch(createMessageAction('Successfully Updated', 'warning'));
+      setSubmitting(false);
+    } catch (error) {
+      dispatch(createMessageAction('Something Went Wrong!', 'error'));
+      setSubmitting(false);
+    }
   };
-  const socailDeleteHandler = (id) => {
+  const socialDeleteHandler = async (id) => {
     const isConfirm = window.confirm('Are you sure?');
     if (!isConfirm) return;
-    dispatch(deleteSocialLinkAction(id));
+    try {
+      await dispatch(deleteSocialLinkAction(id));
+      dispatch(createMessageAction('Successfully Deleted', 'warning'));
+    } catch (error) {
+      dispatch(createMessageAction('Something Went Wrong!', 'error'));
+    }
   };
   const logoutHandler = () => {
     const isConfirm = window.confirm('Are you sure?');
@@ -114,9 +134,9 @@ export default function NavComponent() {
         socialLinks={socialLinks}
         isAdmin={isAdmin}
         colors={colors}
-        updateHandler={socailUpdateHandler}
-        submitHandler={socailSubmitHandler}
-        deleteHandler={socailDeleteHandler}
+        updateHandler={socialUpdateHandler}
+        submitHandler={socialSubmitHandler}
+        deleteHandler={socialDeleteHandler}
       />
     </div>
   );
