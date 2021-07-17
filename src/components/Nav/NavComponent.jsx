@@ -18,6 +18,7 @@ import {
   editSocialLinkAction,
 } from '../../store/actions/AdminActions';
 import { logout } from '../../store/actions/authActions';
+import { createMessageAction } from '../../store/actions/MessageActions';
 export default function NavComponent() {
   const dispatch = useDispatch();
   const colors = useSelector((state) => state.colors);
@@ -34,8 +35,14 @@ export default function NavComponent() {
     dispatch(editColorAction(values));
     return;
   };
-  const adminDetailSubmitHandler = (values) => {
-    dispatch(editNameAction(values.name, values.title));
+  const adminDetailSubmitHandler = async (values) => {
+    try {
+      const { name, title } = values;
+      await dispatch(editNameAction(name, title));
+      dispatch(createMessageAction('Successfully Changed', 'warning'));
+    } catch (error) {
+      dispatch(createMessageAction('Something Went Wrong!', 'error'));
+    }
   };
   const socailSubmitHandler = (values) => {
     dispatch(createSocialLinkAction(values));

@@ -2,7 +2,7 @@ import React from 'react';
 import style from './style.module.scss';
 import { IoClose } from 'react-icons/io5';
 import { useDispatch } from 'react-redux';
-import { removeErrorAction } from '../store/actions/ErrorActions';
+import { removeMessageAction } from '../store/actions/MessageActions';
 export default function MessageBox({
   warningColor,
   textColor,
@@ -11,14 +11,14 @@ export default function MessageBox({
 }) {
   const dispatch = useDispatch();
   const closeHandler = () => {
-    dispatch(removeErrorAction());
+    dispatch(removeMessageAction());
   };
   return (
     <div
       className={style.messageBox}
       onClick={closeHandler}
       style={{
-        backgroundColor: status === 'warning' ? warningColor : 'green',
+        backgroundColor: status === 'error' ? warningColor : 'green',
         color: textColor,
       }}>
       <span>{message}</span>
