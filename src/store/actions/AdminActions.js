@@ -276,11 +276,11 @@ export function editColorAction(name, value) {
 // SOCAIL LINKS
 export function createSocialLinkAction(data) {
   return async (dispatch) => {
-    await axios.post('/socialLink/', data);
+    const res = await axios.post('/socialLink/', data);
     dispatch({
       type: CREATE_SOCIAL_lINK,
       payload: {
-        data,
+        data: res.data,
       },
     });
   };
