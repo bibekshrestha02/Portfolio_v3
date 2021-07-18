@@ -3,7 +3,7 @@ import style from './style.module.scss';
 import { AiOutlineDelete, AiOutlineEdit } from 'react-icons/ai';
 import ImageAssets from '../assets/ImageAssets';
 import MyTextInput from './MyInputsCompoenent/MyTextInput';
-const ModelComponent = lazy(() => import('./ModelComponent'));
+const ModelComponent = lazy(() => import('./FormModelComponent'));
 export default function TechnologyComponent({
   skill,
   colors,

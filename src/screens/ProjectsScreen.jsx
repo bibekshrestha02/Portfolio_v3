@@ -15,7 +15,9 @@ import {
   projectFetchAction,
 } from '../store/actions/AdminActions';
 import { createMessageAction } from '../store/actions/MessageActions';
-const ModelComponent = React.lazy(() => import('../components/ModelComponent'));
+const ModelComponent = React.lazy(() =>
+  import('../components/FormModelComponent')
+);
 export default function ProjectsScreen() {
   const dispatch = useDispatch();
   const [isEditModel, setEditModel] = React.useState(false);

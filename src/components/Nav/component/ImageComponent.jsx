@@ -7,7 +7,9 @@ import MyColorInput from '../../MyInputsCompoenent/MyColorInput';
 import ImageAssets from '../../../assets/ImageAssets';
 import * as Yup from 'yup';
 import { useSelector } from 'react-redux';
-import ModelComponent from '../../ModelComponent';
+import ModelComponent from '../../FormModelComponent';
+import ColorModelComponent from '../../ColorModelComponent';
+
 export default function ImageComponent({
   image,
   isAdmin,
@@ -56,6 +58,7 @@ export default function ImageComponent({
   });
   return (
     <div>
+      {/* Profile Image Container */}
       <div className={style.imageContainer}>
         {isImageLoading && (
           <div
@@ -91,7 +94,7 @@ export default function ImageComponent({
           />
         )}
       </div>
-
+      {/* Profile Model */}
       {isProfileModel && (
         <ModelComponent
           title='Change Profile'
@@ -114,30 +117,21 @@ export default function ImageComponent({
           }}
         </ModelComponent>
       )}
+      {/* Color Model */}
       {isColorModel && (
-        <ModelComponent
+        <ColorModelComponent
           title='Color Templetes'
-          closeHandler={colorModelToggler}
-          initalValues={colorValues}
-          validationSchema={colorValidationSchema}
-          submitHandler={colorSubmitHandler}>
-          {() => {
-            return (
-              <>
-                <MyColorInput label='Primary' name='primary' />
-                <MyColorInput label='Nav Text' name='navText' />
-                <MyColorInput label='Text' name='text' />
-                <MyColorInput label='Nav Hover' name='navHover' />
-                <MyColorInput label='Page Background' name='pageBackground' />
-                <MyColorInput
-                  label='Screen Background'
-                  name='screenBackground'
-                />
-                <MyColorInput type='color' label='Warning' name='warning' />
-              </>
-            );
-          }}
-        </ModelComponent>
+          closeHandler={colorModelToggler}>
+          <>
+            <MyColorInput label='Primary' name='primary' />
+            <MyColorInput label='Nav Text' name='navText' />
+            <MyColorInput label='Text' name='text' />
+            <MyColorInput label='Nav Hover' name='navHover' />
+            <MyColorInput label='Page Background' name='pageBackground' />
+            <MyColorInput label='Screen Background' name='screenBackground' />
+            <MyColorInput type='color' label='Warning' name='warning' />
+          </>
+        </ColorModelComponent>
       )}
     </div>
   );

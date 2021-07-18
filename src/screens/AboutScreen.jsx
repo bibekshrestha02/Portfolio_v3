@@ -3,7 +3,7 @@ import ScreenTemplete from '../templetes/ScreenTemplete';
 import { useSelector, useDispatch } from 'react-redux';
 import ButtonAssets from '../assets/ButtonAssets';
 import style from './style.module.scss';
-import ModelComponent from '../components/ModelComponent';
+import ModelComponent from '../components/FormModelComponent';
 import MyTextInput from '../components/MyInputsCompoenent/MyTextInput';
 import MyTextArea from '../components/MyInputsCompoenent/MyTextArea';
 import * as yup from 'yup';

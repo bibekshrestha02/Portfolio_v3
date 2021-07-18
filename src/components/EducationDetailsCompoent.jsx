@@ -2,7 +2,7 @@ import React, { lazy } from 'react';
 import style from './style.module.scss';
 import { AiOutlineDelete, AiOutlineEdit } from 'react-icons/ai';
 import MyTextInput from './MyInputsCompoenent/MyTextInput';
-const ModelComponent = lazy(() => import('../components/ModelComponent'));
+const ModelComponent = lazy(() => import('../components/FormModelComponent'));
 export default function EducationDetailsCompoent({
   course,
   isAdmin,

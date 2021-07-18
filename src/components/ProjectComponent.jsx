@@ -4,7 +4,7 @@ import ImageLoadingComponent from './ImageLoadingComponent';
 import { AiOutlineDelete, AiOutlineEdit } from 'react-icons/ai';
 import MyTextInput from './MyInputsCompoenent/MyTextInput';
 import ImageAssets from '../assets/ImageAssets';
-const ModelComponent = lazy(() => import('./ModelComponent'));
+const ModelComponent = lazy(() => import('./FormModelComponent'));
 export default function ProjectComponent({
   project,
   colors,

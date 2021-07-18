@@ -15,7 +15,7 @@ import {
 } from '../store/actions/AdminActions';
 import { createMessageAction } from '../store/actions/MessageActions';
 
-const ModelComponent = lazy(() => import('../components/ModelComponent'));
+const ModelComponent = lazy(() => import('../components/FormModelComponent'));
 export default function EducationScreen() {
   const [isPageEdit, setPageEdit] = React.useState(false);
   const [isCreateModel, setCreateModel] = React.useState(false);

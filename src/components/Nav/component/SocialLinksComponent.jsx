@@ -5,7 +5,7 @@ import { AiOutlineEdit } from 'react-icons/ai';
 import MyTextInput from '../../MyInputsCompoenent/MyTextInput';
 import ImageAssets from '../../../assets/ImageAssets';
 import * as Yup from 'yup';
-import ModelComponent from '../../../components/ModelComponent';
+import ModelComponent from '../../../components/FormModelComponent';
 const SocialIconComponent = ({
   isAdmin,
   link,

@@ -25,6 +25,7 @@ export default function ModelComponent({
           <Form>
             <div className={style.modelContainer} style={{ color: text }}>
               <div className={style.container}>
+                {/* Heading */}
                 <div className={style.heading}>
                   <span style={{ color: primary }}>{title}</span>
                   <div className={style.iconContainer}>
@@ -35,7 +36,9 @@ export default function ModelComponent({
                     />
                   </div>
                 </div>
+                {/* Body */}
                 <div className={style.body}>{children(values)}</div>
+                {/* Footer */}
                 <div className={style.footer}>
                   <ButtonAssets
                     title='Submit'

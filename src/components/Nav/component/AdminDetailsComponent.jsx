@@ -3,7 +3,7 @@ import style from '../style.module.scss';
 import { BiEdit } from 'react-icons/bi';
 import MyTextInput from '../../MyInputsCompoenent/MyTextInput';
 import * as Yup from 'yup';
-import ModelComponent from '../../../components/ModelComponent';
+import ModelComponent from '../../../components/FormModelComponent';
 export default function AdminDetailsComponent({
   name,
   title,

@@ -15,7 +15,7 @@ import {
   skillFetchAction,
 } from '../store/actions/AdminActions';
 import { createMessageAction } from '../store/actions/MessageActions';
-const ModelComponent = lazy(() => import('../components/ModelComponent'));
+const ModelComponent = lazy(() => import('../components/FormModelComponent'));
 
 export default function SkillScreen() {
   const dispatch = useDispatch();
