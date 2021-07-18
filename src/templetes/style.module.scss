@@ -23,13 +23,22 @@
 }
 .screenTempleteContainer {
   position: relative;
-
   height: 100%;
   width: 100%;
   .component {
     padding-left: 100px;
     padding-top: 120px;
     padding-right: 100px;
+    @media screen and (max-width: $tabWidth) {
+      padding-left: 80px;
+      padding-top: 60px;
+      padding-right: 20px;
+    }
+    @media screen and (max-width: $mobileWidth) {
+      padding-left: 20px;
+      padding-top: 60px;
+      padding-right: 20px;
+    }
   }
   .icon {
     position: absolute;
@@ -50,15 +59,5 @@
     @media screen and (max-width: $tabWidth) {
       font-size: 30px;
     }
-  }
-  @media screen and (max-width: $tabWidth) {
-    padding-left: 80px;
-    padding-top: 60px;
-    padding-right: 20px;
-  }
-  @media screen and (max-width: $mobileWidth) {
-    padding-left: 20px;
-    padding-top: 60px;
-    padding-right: 20px;
   }
 }

@@ -148,20 +148,24 @@ export default function NavComponent() {
   return (
     <div className={style.navMainContainer}>
       <div className={style.navContainer} style={navContainerStyle}>
-        <ImageComponent
-          colors={colors}
-          image={profilePath}
-          isAdmin={isAdmin}
-          colorSubmitHandler={colorSubmitHandler}
-          submitHandler={profileImageSubmitHandler}
-        />
-        <AdminDetailsComponent
-          colors={colors}
-          name={name}
-          title={title}
-          isAdmin={isAdmin}
-          submitHandler={adminDetailSubmitHandler}
-        />
+        <div className={style.firstChild}>
+          <ImageComponent
+            colors={colors}
+            image={profilePath}
+            isAdmin={isAdmin}
+            colorSubmitHandler={colorSubmitHandler}
+            submitHandler={profileImageSubmitHandler}
+          />
+          <AdminDetailsComponent
+            colors={colors}
+            name={name}
+            title={title}
+            isAdmin={isAdmin}
+            submitHandler={adminDetailSubmitHandler}
+          />
+          <div></div>
+        </div>
+
         <div className={style.links}>{linksContainer}</div>
         <FiMenu
           color={colors.navText}
