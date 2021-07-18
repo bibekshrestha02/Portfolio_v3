@@ -26,14 +26,14 @@ export default function SkillScreen() {
   const colors = useSelector((state) => state.colors);
   const initalValues = {
     name: '',
-    icon: '',
+    iconPath: '',
   };
   const pageInitalValues = {
     title: title ? title : '',
   };
   const validationSchema = yup.object({
-    name: yup.string().min(4).max(100).required(),
-    icon: yup.string().min(4).required(),
+    name: yup.string().min(2).max(100).required(),
+    iconPath: yup.string().min(4).required(),
   });
   const pageValidationSchema = yup.object({
     title: yup.string().min(4).max(100).required(),
@@ -54,21 +54,44 @@ export default function SkillScreen() {
       dispatch(createMessageAction('Successfully Updated!', 'warning'));
       setSubmitting(false);
     } catch (error) {
-      console.log(error);
+      setSubmitting(false);
+      dispatch(createMessageAction('Something Went Wrong!', 'error'));
+    }
+  };
+
+  const createSubmitHandler = async (values, { setSubmitting }) => {
+    try {
+      setSubmitting(true);
+      await dispatch(createSkillAction(values));
+      dispatch(createMessageAction('Successfully Created!', 'warning'));
+      setSubmitting(false);
+    } catch (error) {
+      dispatch(createMessageAction('Something Went Wrong!', 'error'));
       setSubmitting(false);
     }
   };
 
-  const createSubmitHandler = (values) => {
-    dispatch(createSkillAction(values));
+  const updateHandler = async (values, { setSubmitting }) => {
+    try {
+      setSubmitting(true);
+      await dispatch(editSkillAction(values));
+      dispatch(createMessageAction('Successfully Updated!', 'warning'));
+      setSubmitting(false);
+    } catch (error) {
+      setSubmitting(false);
+      dispatch(createMessageAction('Something Went Wrong!', 'error'));
+    }
   };
-  const updateHandler = (values) => {
-    dispatch(editSkillAction(values));
-  };
-  const deleteHandler = (id) => {
-    const isConfirm = window.confirm('Are you sure? \n You wants to delete.');
+
+  const deleteHandler = async (id) => {
+    const isConfirm = window.confirm('Are you sure?');
     if (!isConfirm) return;
-    dispatch(deleteSkillAction(id));
+    try {
+      await dispatch(deleteSkillAction(id));
+      dispatch(createMessageAction('Successfully Deleted!', 'warning'));
+    } catch (error) {
+      dispatch(createMessageAction('Something Went Wrong!', 'error'));
+    }
   };
   return (
     <FetchInitalApi action={skillFetchAction} name='skill'>
@@ -122,11 +145,11 @@ export default function SkillScreen() {
             {(value) => {
               return (
                 <>
-                  <ImageAssets path={value.icon} />
+                  <ImageAssets path={value.iconPath} />
                   <MyTextInput
-                    name='icon'
-                    label='Icon'
-                    placeholder='Enter Icon'
+                    name='iconPath'
+                    label='Icon Path'
+                    placeholder='Enter IconPath'
                   />
                   <MyTextInput
                     name='name'

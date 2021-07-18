@@ -25,13 +25,13 @@ export default function ProjectsScreen() {
   const colors = useSelector((state) => state.colors);
   const projectInitalValue = {
     name: '',
-    path: '',
-    icon: '',
+    link: '',
+    iconPath: '',
   };
   const projectValidationSchema = yup.object({
     name: yup.string().min(4).max(100).required(),
-    path: yup.string().min(4).required(),
-    icon: yup.string().min(4).required(),
+    link: yup.string().min(4).required(),
+    iconPath: yup.string().min(4).required(),
   });
   const initalValue = {
     title: title ? title : '',
@@ -47,9 +47,6 @@ export default function ProjectsScreen() {
     setProjectModel((e) => !e);
     return;
   };
-  const projectSubmitHandler = (values) => {
-    dispatch(createProjectAction(values));
-  };
   const editPageSubmitHandler = async (values, { setSubmitting }) => {
     try {
       setSubmitting(true);
@@ -58,16 +55,47 @@ export default function ProjectsScreen() {
       setSubmitting(false);
     } catch (error) {
       console.log(error);
+      dispatch(createMessageAction('Something Went Wrong', 'error'));
       setSubmitting(false);
     }
   };
-  const updateHandler = (values) => {
-    dispatch(editProjectAction(values));
+
+  const projectSubmitHandler = async (values, { setSubmitting }) => {
+    try {
+      setSubmitting(true);
+      await dispatch(createProjectAction(values));
+      dispatch(createMessageAction('Successfully Created!', 'warning'));
+      setSubmitting(false);
+    } catch (error) {
+      console.log(error);
+      setSubmitting(false);
+      dispatch(createMessageAction('Something Went Wrong', 'error'));
+    }
   };
-  const deleteHandler = (id) => {
-    const isConfirm = window.confirm('Are you sure?\n You wants to delete.');
+
+  const updateHandler = async (values, { setSubmitting }) => {
+    try {
+      setSubmitting(true);
+      await dispatch(editProjectAction(values));
+      dispatch(createMessageAction('Successfully Updated!', 'warning'));
+      setSubmitting(false);
+    } catch (error) {
+      console.log(error.response);
+      setSubmitting(false);
+      dispatch(createMessageAction('Something Went Wrong', 'error'));
+    }
+  };
+
+  const deleteHandler = async (id) => {
+    const isConfirm = window.confirm('Are you sure?');
     if (!isConfirm) return;
-    dispatch(deleteProjectAction(id));
+    try {
+      await dispatch(deleteProjectAction(id));
+      dispatch(createMessageAction('Successfully Deleted!', 'warning'));
+    } catch (error) {
+      console.log(error);
+      dispatch(createMessageAction('Something Went Wrong', 'error'));
+    }
   };
   return (
     <FetchInitalApi action={projectFetchAction} name='project'>
@@ -121,11 +149,11 @@ export default function ProjectsScreen() {
             {(value) => {
               return (
                 <>
-                  <ImageAssets path={value.icon} />
+                  <ImageAssets path={value.iconPath} />
                   <MyTextInput
-                    name='icon'
-                    label='Icon'
-                    placeholder='Enter Icon'
+                    name='iconPath'
+                    label='IconPath'
+                    placeholder='Enter IconPath'
                   />
                   <MyTextInput
                     name='name'
@@ -133,9 +161,9 @@ export default function ProjectsScreen() {
                     placeholder='Enter Name'
                   />
                   <MyTextInput
-                    name='path'
+                    name='link'
                     label='Path'
-                    placeholder='Enter Path'
+                    placeholder='Enter link'
                   />
                 </>
               );

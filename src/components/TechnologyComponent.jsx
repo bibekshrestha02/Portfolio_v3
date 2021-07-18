@@ -18,7 +18,7 @@ export default function TechnologyComponent({
   };
   const initalValues = {
     name: skill.name,
-    icon: skill.icon,
+    iconPath: skill.iconPath,
     _id: skill._id,
   };
   return (
@@ -56,9 +56,9 @@ export default function TechnologyComponent({
               <>
                 <ImageAssets path={value.icon} />
                 <MyTextInput
-                  name='icon'
-                  label='Icon'
-                  placeholder='Enter Icon'
+                  name='iconPath'
+                  label='Icon Path'
+                  placeholder='Enter Icon Path'
                 />
                 <MyTextInput
                   name='name'

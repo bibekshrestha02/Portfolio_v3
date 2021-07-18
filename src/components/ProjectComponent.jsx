@@ -19,9 +19,10 @@ export default function ProjectComponent({
     setUpdateModel((e) => !e);
   };
   const initalValues = {
+    _id: project._id,
     name: project.name,
-    path: project.path,
-    icon: project.icon,
+    link: project.link,
+    iconPath: project.iconPath,
   };
   return (
     <>
@@ -43,13 +44,13 @@ export default function ProjectComponent({
           </div>
         )}
         <a
-          href={project.path}
+          href={project.link}
           target='_blank'
           rel='noreferrer'
           style={{ color: colors.text }}>
           <ImageLoadingComponent isLoading={isImageLoading} />
           <img
-            src={project.icon}
+            src={project.iconPath}
             alt='project'
             style={{ display: isImageLoading ? 'none' : 'block' }}
             onLoad={() => setImageLoading(false)}
@@ -68,11 +69,11 @@ export default function ProjectComponent({
           {(value) => {
             return (
               <>
-                <ImageAssets path={value.icon} />
+                <ImageAssets path={value.iconPath} />
                 <MyTextInput
-                  name='icon'
+                  name='iconPath'
                   label='Icon'
-                  placeholder='Enter Icon'
+                  placeholder='Enter Icon Path'
                 />
                 <MyTextInput
                   name='name'
@@ -80,9 +81,9 @@ export default function ProjectComponent({
                   placeholder='Enter Name'
                 />
                 <MyTextInput
-                  name='path'
-                  label='Path'
-                  placeholder='Enter Path'
+                  name='link'
+                  label='Link'
+                  placeholder='Enter Link'
                 />
               </>
             );

@@ -145,17 +145,19 @@ export function editProjectTitlePageAction(title) {
   };
 }
 export function createProjectAction(data) {
-  return (dispatch) => {
+  return async (dispatch) => {
+    let res = await axios.post(`/project/`, data);
     dispatch({
       type: CREATE_PROJECT,
       payload: {
-        data,
+        data: res.data,
       },
     });
   };
 }
 export function editProjectAction(data) {
-  return (dispatch) => {
+  return async (dispatch) => {
+    await axios.put(`/project/${data._id}`, data);
     dispatch({
       type: EDIT_PROJECT,
       payload: {
@@ -165,7 +167,8 @@ export function editProjectAction(data) {
   };
 }
 export function deleteProjectAction(id) {
-  return (dispatch) => {
+  return async (dispatch) => {
+    await axios.delete(`/project/${id}`);
     dispatch({
       type: DELETE_PROJECT,
       payload: {
@@ -197,17 +200,21 @@ export function editSkillTitlePageAction(title) {
   };
 }
 export function createSkillAction(data) {
-  return (dispatch) => {
+  return async (dispatch) => {
+    const res = await axios.post('/skill/', data);
+
     dispatch({
       type: CREATE_SKILL,
       payload: {
-        data,
+        data: res.data,
       },
     });
   };
 }
 export function editSkillAction(data) {
-  return (dispatch) => {
+  return async (dispatch) => {
+    await axios.put(`/skill/${data._id}`, data);
+
     dispatch({
       type: EDIT_SKILL,
       payload: {
@@ -217,7 +224,9 @@ export function editSkillAction(data) {
   };
 }
 export function deleteSkillAction(id) {
-  return (dispatch) => {
+  return async (dispatch) => {
+    await axios.delete(`/skill/${id}`);
+
     dispatch({
       type: DELETE_SKILL,
       payload: {
