@@ -41,7 +41,7 @@ export default function TechnologyComponent({
       )}
 
       <div className={style.iconContainer}>
-        <img src={skill.icon} alt='icon' />
+        <img src={skill.iconPath} alt='icon' />
       </div>
       <span>{skill.name}</span>
       {isUpdateModel && (
