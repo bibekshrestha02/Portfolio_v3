@@ -10,7 +10,6 @@ import {
   editContactPageAction,
   contactFetchAction,
 } from '../store/actions/AdminActions';
-import FetchInitalApi from '../templetes/FetchInitalApi';
 import { createMessageAction } from '../store/actions/MessageActions';
 export default function ContactScreen() {
   const [isEditModel, setEditModel] = React.useState(false);
@@ -48,51 +47,52 @@ export default function ContactScreen() {
     }
   };
   return (
-    <FetchInitalApi action={contactFetchAction} name='contact'>
-      <ScreenTemplete title={title} editHandler={editModalHandler}>
-        <div className={style.contactScreen}>
-          <p>{detail}</p>
-          <a href={`mailto:${email}`}>{email}</a>
-          <p>
-            <i>{subDetail}</i>
-          </p>
-        </div>
-        {isEditModel && (
-          <ModelComponent
-            title='Edit Page'
-            closeHandler={editModalHandler}
-            initalValues={initalValue}
-            validationSchema={validationSchema}
-            submitHandler={submitHandler}>
-            {() => {
-              return (
-                <>
-                  <MyTextInput
-                    name='title'
-                    label='Title'
-                    placeholder='Enter Title'
-                  />
-                  <MyTextInput
-                    name='email'
-                    label='Email'
-                    placeholder='Enter Email'
-                  />
-                  <MyTextArea
-                    name='detail'
-                    label='Detail'
-                    placeholder='Enter Detail'
-                  />
-                  <MyTextArea
-                    name='subDetail'
-                    label='Sub-Details'
-                    placeholder='Enter Sub-Details'
-                  />
-                </>
-              );
-            }}
-          </ModelComponent>
-        )}
-      </ScreenTemplete>
-    </FetchInitalApi>
+    <ScreenTemplete
+      title={title}
+      action={contactFetchAction}
+      editHandler={editModalHandler}>
+      <div className={style.contactScreen}>
+        <p>{detail}</p>
+        <a href={`mailto:${email}`}>{email}</a>
+        <p>
+          <i>{subDetail}</i>
+        </p>
+      </div>
+      {isEditModel && (
+        <ModelComponent
+          title='Edit Page'
+          closeHandler={editModalHandler}
+          initalValues={initalValue}
+          validationSchema={validationSchema}
+          submitHandler={submitHandler}>
+          {() => {
+            return (
+              <>
+                <MyTextInput
+                  name='title'
+                  label='Title'
+                  placeholder='Enter Title'
+                />
+                <MyTextInput
+                  name='email'
+                  label='Email'
+                  placeholder='Enter Email'
+                />
+                <MyTextArea
+                  name='detail'
+                  label='Detail'
+                  placeholder='Enter Detail'
+                />
+                <MyTextArea
+                  name='subDetail'
+                  label='Sub-Details'
+                  placeholder='Enter Sub-Details'
+                />
+              </>
+            );
+          }}
+        </ModelComponent>
+      )}
+    </ScreenTemplete>
   );
 }

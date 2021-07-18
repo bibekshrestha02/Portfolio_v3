@@ -1,23 +1,24 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import style from './style.module.scss';
 import { BiEdit } from 'react-icons/bi';
 import { IoMdAdd } from 'react-icons/io';
-import { useSelector } from 'react-redux';
+import { useSelector, useDispatch } from 'react-redux';
+
+import LoadingComponent from '../components/LoadingComponent';
 export default function ScreenTemplete({
   title,
   editHandler,
   children,
   isCreateButton,
   createHandler,
+  action,
 }) {
+  const dispatch = useDispatch();
+  const [isLoading, setLoading] = useState(true);
   const { isAdmin } = useSelector((state) => state.admin);
   const { screenBackground, text, primary } = useSelector(
     (state) => state.colors
   );
-  const containerStyle = {
-    color: text,
-    backgroundColor: screenBackground,
-  };
   function textColorChanger(text) {
     if (!text) {
       return;
@@ -43,22 +44,56 @@ export default function ScreenTemplete({
       return <span className={style.title}>{textNode}</span>;
     }
   }
+
+  useEffect(() => {
+    if (!action) {
+      setLoading(false);
+      return;
+    }
+    const init = async () => {
+      try {
+        setLoading(true);
+        await dispatch(action());
+        setLoading(false);
+      } catch (error) {
+        console.log(error);
+      }
+    };
+    init();
+  }, [action, dispatch]);
+
+  let data;
+  if (isLoading) {
+    data = <LoadingComponent />;
+  } else {
+    data = (
+      <div className={style.component}>
+        {isAdmin && (
+          <div>
+            <BiEdit className={style.icon} onClick={editHandler} size={30} />
+            {isCreateButton && (
+              <IoMdAdd
+                className={style.icon2}
+                onClick={createHandler}
+                size={30}
+              />
+            )}
+          </div>
+        )}
+        <div>{textColorChanger(title)}</div>
+        {children}
+      </div>
+    );
+  }
+
   return (
-    <div className={style.screenTempleteContainer} style={containerStyle}>
-      {isAdmin && (
-        <div>
-          <BiEdit className={style.icon} onClick={editHandler} size={30} />
-          {isCreateButton && (
-            <IoMdAdd
-              className={style.icon2}
-              onClick={createHandler}
-              size={30}
-            />
-          )}
-        </div>
-      )}
-      <div>{textColorChanger(title)}</div>
-      {children}
+    <div
+      className={style.screenTempleteContainer}
+      style={{
+        color: text,
+        backgroundColor: screenBackground,
+      }}>
+      {data}
     </div>
   );
 }

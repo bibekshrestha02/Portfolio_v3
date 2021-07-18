@@ -3,7 +3,6 @@ import ScreenTemplete from '../templetes/ScreenTemplete';
 import { useSelector, useDispatch } from 'react-redux';
 import ProjectComponent from '../components/ProjectComponent';
 import style from './style.module.scss';
-import FetchInitalApi from '../templetes/FetchInitalApi';
 import MyTextInput from '../components/MyInputsCompoenent/MyTextInput';
 import ImageAssets from '../assets/ImageAssets';
 import * as yup from 'yup';
@@ -100,79 +99,78 @@ export default function ProjectsScreen() {
     }
   };
   return (
-    <FetchInitalApi action={projectFetchAction} name='project'>
-      <ScreenTemplete
-        title={title}
-        editHandler={editModalHandler}
-        isCreateButton
-        createHandler={projectModelHandler}>
-        <div className={style.projectsScreenContainer}>
-          {data.map((project) => {
+    <ScreenTemplete
+      action={projectFetchAction}
+      title={title}
+      editHandler={editModalHandler}
+      isCreateButton
+      createHandler={projectModelHandler}>
+      <div className={style.projectsScreenContainer}>
+        {data.map((project) => {
+          return (
+            <ProjectComponent
+              isAdmin={isAdmin}
+              colors={colors}
+              project={project}
+              key={project._id}
+              validationSchema={projectValidationSchema}
+              updateHandler={updateHandler}
+              deleteHandler={deleteHandler}
+            />
+          );
+        })}
+      </div>
+      {isEditModel && (
+        <ModelComponent
+          title='Edit Page'
+          closeHandler={editModalHandler}
+          initalValues={initalValue}
+          validationSchema={validationSchema}
+          submitHandler={editPageSubmitHandler}>
+          {() => {
             return (
-              <ProjectComponent
-                isAdmin={isAdmin}
-                colors={colors}
-                project={project}
-                key={project._id}
-                validationSchema={projectValidationSchema}
-                updateHandler={updateHandler}
-                deleteHandler={deleteHandler}
-              />
+              <>
+                <MyTextInput
+                  name='title'
+                  label='Title'
+                  placeholder='Enter Title'
+                />
+              </>
             );
-          })}
-        </div>
-        {isEditModel && (
-          <ModelComponent
-            title='Edit Page'
-            closeHandler={editModalHandler}
-            initalValues={initalValue}
-            validationSchema={validationSchema}
-            submitHandler={editPageSubmitHandler}>
-            {() => {
-              return (
-                <>
-                  <MyTextInput
-                    name='title'
-                    label='Title'
-                    placeholder='Enter Title'
-                  />
-                </>
-              );
-            }}
-          </ModelComponent>
-        )}
-        {isProjectModel && (
-          <ModelComponent
-            title='Add Project'
-            closeHandler={projectModelHandler}
-            initalValues={projectInitalValue}
-            validationSchema={projectValidationSchema}
-            submitHandler={projectSubmitHandler}>
-            {(value) => {
-              return (
-                <>
-                  <ImageAssets path={value.iconPath} />
-                  <MyTextInput
-                    name='iconPath'
-                    label='IconPath'
-                    placeholder='Enter IconPath'
-                  />
-                  <MyTextInput
-                    name='name'
-                    label='Name'
-                    placeholder='Enter Name'
-                  />
-                  <MyTextInput
-                    name='link'
-                    label='Path'
-                    placeholder='Enter link'
-                  />
-                </>
-              );
-            }}
-          </ModelComponent>
-        )}
-      </ScreenTemplete>
-    </FetchInitalApi>
+          }}
+        </ModelComponent>
+      )}
+      {isProjectModel && (
+        <ModelComponent
+          title='Add Project'
+          closeHandler={projectModelHandler}
+          initalValues={projectInitalValue}
+          validationSchema={projectValidationSchema}
+          submitHandler={projectSubmitHandler}>
+          {(value) => {
+            return (
+              <>
+                <ImageAssets path={value.iconPath} />
+                <MyTextInput
+                  name='iconPath'
+                  label='IconPath'
+                  placeholder='Enter IconPath'
+                />
+                <MyTextInput
+                  name='name'
+                  label='Name'
+                  placeholder='Enter Name'
+                />
+                <MyTextInput
+                  name='link'
+                  label='Path'
+                  placeholder='Enter link'
+                />
+              </>
+            );
+          }}
+        </ModelComponent>
+      )}
+    </ScreenTemplete>
   );
 }

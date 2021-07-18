@@ -23,9 +23,14 @@
 }
 .screenTempleteContainer {
   position: relative;
-  padding-left: 100px;
-  padding-top: 120px;
-  padding-right: 100px;
+
+  height: 100%;
+  width: 100%;
+  .component {
+    padding-left: 100px;
+    padding-top: 120px;
+    padding-right: 100px;
+  }
   .icon {
     position: absolute;
     top: 0;

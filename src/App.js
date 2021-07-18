@@ -16,25 +16,24 @@ function App() {
   const dispatch = useDispatch();
   useEffect(() => {
     dispatch(initalCheck());
+    dispatch(initalFetchAction());
   }, [dispatch]);
   return (
-    <FetchInitalApi action={initalFetchAction}>
-      <Router>
-        <MainTempletes>
-          <Suspense fallback={<LoadingComponent />}>
-            <Switch>
-              <Route exact path='/' component={AboutScreen} />
-              <Route path='/contacts' component={ContactScreen} />
-              <Route path='/educations' component={EducationScreen} />
-              <Route path='/projects' component={ProjectsScreen} />
-              <Route path='/skills' component={SkillScreen} />
-              <Route path='/login' component={LoginScreen} />
-              <Route path='*' component={AboutScreen} />
-            </Switch>
-          </Suspense>
-        </MainTempletes>
-      </Router>
-    </FetchInitalApi>
+    <Router>
+      <MainTempletes>
+        <Suspense fallback={<LoadingComponent />}>
+          <Switch>
+            <Route exact path='/' component={AboutScreen} />
+            <Route path='/contacts' component={ContactScreen} />
+            <Route path='/educations' component={EducationScreen} />
+            <Route path='/projects' component={ProjectsScreen} />
+            <Route path='/skills' component={SkillScreen} />
+            <Route path='/login' component={LoginScreen} />
+            <Route path='*' component={AboutScreen} />
+          </Switch>
+        </Suspense>
+      </MainTempletes>
+    </Router>
   );
 }
 export default App;

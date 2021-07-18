@@ -6,7 +6,6 @@ import style from './style.module.scss';
 import MyTextInput from '../components/MyInputsCompoenent/MyTextInput';
 import * as yup from 'yup';
 import ImageAssets from '../assets/ImageAssets';
-import FetchInitalApi from '../templetes/FetchInitalApi';
 import {
   editSkillTitlePageAction,
   createSkillAction,
@@ -94,74 +93,73 @@ export default function SkillScreen() {
     }
   };
   return (
-    <FetchInitalApi action={skillFetchAction} name='skill'>
-      <ScreenTemplete
-        title={title}
-        editHandler={pageModelToggler}
-        isCreateButton
-        createHandler={createModelToggler}>
-        <div className={style.skillScreenContainer}>
-          {data.map((skill) => (
-            <TechnologyComponent
-              isAdmin={isAdmin}
-              skill={skill}
-              key={skill._id}
-              colors={colors}
-              updateHandler={updateHandler}
-              validationSchema={validationSchema}
-              deleteHandler={deleteHandler}
-            />
-          ))}
-        </div>
-        {/* page edit model */}
-        {isPageEdit && (
-          <ModelComponent
-            title='Edit Page'
-            closeHandler={pageModelToggler}
-            initalValues={pageInitalValues}
-            validationSchema={pageValidationSchema}
-            submitHandler={editPageSubmitHandler}>
-            {() => {
-              return (
-                <>
-                  <MyTextInput
-                    name='title'
-                    label='Title'
-                    placeholder='Enter Title'
-                  />
-                </>
-              );
-            }}
-          </ModelComponent>
-        )}
-        {/* Create Skills Model */}
-        {isCreateModel && (
-          <ModelComponent
-            title='Add Skills'
-            closeHandler={createModelToggler}
-            initalValues={initalValues}
+    <ScreenTemplete
+      title={title}
+      action={skillFetchAction}
+      editHandler={pageModelToggler}
+      isCreateButton
+      createHandler={createModelToggler}>
+      <div className={style.skillScreenContainer}>
+        {data.map((skill) => (
+          <TechnologyComponent
+            isAdmin={isAdmin}
+            skill={skill}
+            key={skill._id}
+            colors={colors}
+            updateHandler={updateHandler}
             validationSchema={validationSchema}
-            submitHandler={createSubmitHandler}>
-            {(value) => {
-              return (
-                <>
-                  <ImageAssets path={value.iconPath} />
-                  <MyTextInput
-                    name='iconPath'
-                    label='Icon Path'
-                    placeholder='Enter IconPath'
-                  />
-                  <MyTextInput
-                    name='name'
-                    label='Name'
-                    placeholder='Enter Name'
-                  />
-                </>
-              );
-            }}
-          </ModelComponent>
-        )}
-      </ScreenTemplete>
-    </FetchInitalApi>
+            deleteHandler={deleteHandler}
+          />
+        ))}
+      </div>
+      {/* page edit model */}
+      {isPageEdit && (
+        <ModelComponent
+          title='Edit Page'
+          closeHandler={pageModelToggler}
+          initalValues={pageInitalValues}
+          validationSchema={pageValidationSchema}
+          submitHandler={editPageSubmitHandler}>
+          {() => {
+            return (
+              <>
+                <MyTextInput
+                  name='title'
+                  label='Title'
+                  placeholder='Enter Title'
+                />
+              </>
+            );
+          }}
+        </ModelComponent>
+      )}
+      {/* Create Skills Model */}
+      {isCreateModel && (
+        <ModelComponent
+          title='Add Skills'
+          closeHandler={createModelToggler}
+          initalValues={initalValues}
+          validationSchema={validationSchema}
+          submitHandler={createSubmitHandler}>
+          {(value) => {
+            return (
+              <>
+                <ImageAssets path={value.iconPath} />
+                <MyTextInput
+                  name='iconPath'
+                  label='Icon Path'
+                  placeholder='Enter IconPath'
+                />
+                <MyTextInput
+                  name='name'
+                  label='Name'
+                  placeholder='Enter Name'
+                />
+              </>
+            );
+          }}
+        </ModelComponent>
+      )}
+    </ScreenTemplete>
   );
 }
