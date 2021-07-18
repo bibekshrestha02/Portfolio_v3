@@ -3,19 +3,16 @@ import style from '../style.module.scss';
 import { IoMdColorPalette } from 'react-icons/io';
 import { BsFillPersonFill } from 'react-icons/bs';
 import MyTextInput from '../../MyInputsCompoenent/MyTextInput';
-import MyColorInput from '../../MyInputsCompoenent/MyColorInput';
 import ImageAssets from '../../../assets/ImageAssets';
 import * as Yup from 'yup';
-import { useSelector } from 'react-redux';
-import ModelComponent from '../../FormModelComponent';
-import ColorModelComponent from '../../ColorModelComponent';
-
+import FormModelComponent from '../../FormModelComponent';
+import ColorComponent from './ColorComponent';
 export default function ImageComponent({
   image,
   isAdmin,
   colors,
-  colorSubmitHandler,
   submitHandler,
+  colorSubmitHandler,
 }) {
   const [isImageLoading, setImageLoading] = useState(true);
   const [isProfileModel, setProfileModel] = useState(false);
@@ -23,39 +20,13 @@ export default function ImageComponent({
   const colorModelToggler = () => setColorModel((e) => !e);
   const profileModelToggler = () => setProfileModel((e) => !e);
 
-  const {
-    primary,
-    navText,
-    text,
-    navHover,
-    pageBackground,
-    screenBackground,
-    warning,
-  } = useSelector((state) => state.colors);
   const profileInitialValues = {
     path: image ? image : '',
   };
   const profileValidationSchema = Yup.object({
     path: Yup.string().required(),
   });
-  const colorValues = {
-    primary,
-    navText,
-    text,
-    navHover,
-    pageBackground,
-    screenBackground,
-    warning,
-  };
-  const colorValidationSchema = Yup.object({
-    primary: Yup.string().required(),
-    navText: Yup.string().required(),
-    text: Yup.string().required(),
-    navHover: Yup.string().required(),
-    pageBackground: Yup.string().required(),
-    screenBackground: Yup.string().required(),
-    warning: Yup.string().required(),
-  });
+
   return (
     <div>
       {/* Profile Image Container */}
@@ -96,7 +67,7 @@ export default function ImageComponent({
       </div>
       {/* Profile Model */}
       {isProfileModel && (
-        <ModelComponent
+        <FormModelComponent
           title='Change Profile'
           closeHandler={profileModelToggler}
           validationSchema={profileValidationSchema}
@@ -115,23 +86,14 @@ export default function ImageComponent({
               </>
             );
           }}
-        </ModelComponent>
+        </FormModelComponent>
       )}
       {/* Color Model */}
       {isColorModel && (
-        <ColorModelComponent
-          title='Color Templetes'
-          closeHandler={colorModelToggler}>
-          <>
-            <MyColorInput label='Primary' name='primary' />
-            <MyColorInput label='Nav Text' name='navText' />
-            <MyColorInput label='Text' name='text' />
-            <MyColorInput label='Nav Hover' name='navHover' />
-            <MyColorInput label='Page Background' name='pageBackground' />
-            <MyColorInput label='Screen Background' name='screenBackground' />
-            <MyColorInput type='color' label='Warning' name='warning' />
-          </>
-        </ColorModelComponent>
+        <ColorComponent
+          closeHandler={colorModelToggler}
+          submitHandler={colorSubmitHandler}
+        />
       )}
     </div>
   );

@@ -261,12 +261,14 @@ export function editProfileAction(path) {
   };
 }
 // EDIT COLOR
-export function editColorAction(data) {
-  return (dispatch) => {
+export function editColorAction(name, value) {
+  return async (dispatch) => {
+    await axios.put(`/color/${name}`, { value });
     dispatch({
       type: EDIT_COLORS,
       payload: {
-        data,
+        name,
+        value,
       },
     });
   };

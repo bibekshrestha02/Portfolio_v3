@@ -39,9 +39,14 @@ export default function NavComponent() {
       setSubmitting(false);
     }
   };
-  const colorSubmitHandler = (values) => {
-    dispatch(editColorAction(values));
-    return;
+
+  const colorSubmitHandler = async (name, value) => {
+    try {
+      await dispatch(editColorAction(name, value));
+      dispatch(createMessageAction('Successfully Changed', 'warning'));
+    } catch (error) {
+      dispatch(createMessageAction('Something Went Wrong!', 'error'));
+    }
   };
   const adminDetailSubmitHandler = async (values) => {
     try {

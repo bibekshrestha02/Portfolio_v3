@@ -1,27 +1,21 @@
-import React from 'react';
-import { useField } from 'formik';
+import React, { useState } from 'react';
 import style from './style.module.scss';
 import { useSelector } from 'react-redux';
-export default function MyTextInput({ label, ...props }) {
-  const [field, meta] = useField(props);
+export default function MyTextInput({ label, value, name, submitHandler }) {
+  const [colorValue, setValue] = useState(value);
   const colors = useSelector((state) => state.colors);
-  const isError = meta.touched && meta.error;
   return (
     <div className={style.myColorInputContainer} style={{ color: colors.text }}>
-      <label>
-        {label && <span>{label}</span>}
+      {label && <span>{label}</span>}
+      <div>
         <input
-          style={{ borderColor: isError ? colors.warning : 'gray' }}
+          style={{ borderColor: 'gray' }}
           type='color'
-          {...field}
-          {...props}
+          value={colorValue}
+          onChange={(e) => setValue(e.target.value)}
         />
-      </label>
-      {isError && (
-        <span style={{ color: colors.warning }} className={style.error}>
-          {meta.error}
-        </span>
-      )}
+        <button onClick={() => submitHandler(name, colorValue)}>Change</button>
+      </div>
     </div>
   );
 }
