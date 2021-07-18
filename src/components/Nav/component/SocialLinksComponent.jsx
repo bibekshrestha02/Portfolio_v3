@@ -42,7 +42,9 @@ const SocialIconComponent = ({
           </div>
         )}
         <a href={link.link} target='_blank' rel='noreferrer'>
-          <img src={link.iconPath} alt='icon' className={style.icon} />
+          <abbr title={link.name}>
+            <img src={link.iconPath} alt='icon' className={style.icon} />
+          </abbr>
         </a>
       </div>
       {isUpdateModel && (
