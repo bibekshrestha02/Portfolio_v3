@@ -24,6 +24,8 @@ export default function ProjectsScreen() {
   const { title, data } = useSelector((state) => state.admin.project);
   const { isAdmin } = useSelector((state) => state.admin);
   const colors = useSelector((state) => state.colors);
+  const { isProject } = useSelector((state) => state.load);
+
   const projectInitalValue = {
     name: '',
     link: '',
@@ -104,6 +106,7 @@ export default function ProjectsScreen() {
       title={title}
       editHandler={editModalHandler}
       isCreateButton
+      isLoad={isProject}
       createHandler={projectModelHandler}>
       <div className={style.projectsScreenContainer}>
         {data.map((project) => {

@@ -22,6 +22,8 @@ export default function EducationScreen() {
   const { isAdmin } = useSelector((state) => state.admin);
   const colors = useSelector((state) => state.colors);
   const dispatch = useDispatch();
+  const { isEducation } = useSelector((state) => state.load);
+
   const pageValue = {
     title: title ? title : '',
   };
@@ -104,6 +106,7 @@ export default function EducationScreen() {
   return (
     <Suspense fallback={<LoadingComponent />}>
       <ScreenTemplete
+        isLoad={isEducation}
         title={title}
         editHandler={pageModelToggler}
         isCreateButton

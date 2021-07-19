@@ -1,8 +1,7 @@
-import React, { Suspense, lazy, useEffect } from 'react';
+import React, { Suspense, lazy, useEffect, useState } from 'react';
 import MainTempletes from './templetes/MainTempletes';
 import LoadingComponent from './components/LoadingComponent';
 import { Route, Switch, BrowserRouter as Router } from 'react-router-dom';
-import FetchInitalApi from './templetes/FetchInitalApi';
 import { initalCheck } from './store/actions/authActions';
 import { initalFetchAction } from './store/actions/AdminActions';
 import { useDispatch } from 'react-redux';
@@ -14,10 +13,29 @@ const SkillScreen = lazy(() => import('./screens/SkillScreen'));
 const LoginScreen = lazy(() => import('./screens/LoginScreen'));
 function App() {
   const dispatch = useDispatch();
+  const [isLoading, setLoading] = useState(true);
+
   useEffect(() => {
-    dispatch(initalCheck());
-    dispatch(initalFetchAction());
+    const init = async () => {
+      try {
+        setLoading(true);
+        await dispatch(initalCheck());
+        await dispatch(initalFetchAction());
+        setLoading(false);
+      } catch (error) {
+        console.log(error);
+      }
+    };
+    init();
   }, [dispatch]);
+
+  if (isLoading) {
+    return (
+      <div style={{ width: '100vw', height: '100vh' }}>
+        <LoadingComponent />
+      </div>
+    );
+  }
   return (
     <Router>
       <MainTempletes>

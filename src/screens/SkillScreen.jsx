@@ -23,6 +23,8 @@ export default function SkillScreen() {
   const { title, data } = useSelector((state) => state.admin.skill);
   const { isAdmin } = useSelector((state) => state.admin);
   const colors = useSelector((state) => state.colors);
+  const { isSkill } = useSelector((state) => state.load);
+
   const initalValues = {
     name: '',
     iconPath: '',
@@ -94,6 +96,7 @@ export default function SkillScreen() {
   };
   return (
     <ScreenTemplete
+      isLoad={isSkill}
       title={title}
       action={skillFetchAction}
       editHandler={pageModelToggler}

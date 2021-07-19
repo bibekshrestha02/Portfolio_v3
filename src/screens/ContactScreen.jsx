@@ -18,6 +18,7 @@ export default function ContactScreen() {
     setEditModel((e) => !e);
     return;
   };
+  const { isContact } = useSelector((state) => state.load);
 
   const { title, detail, subDetail, email } = useSelector(
     (state) => state.admin.contact
@@ -50,7 +51,8 @@ export default function ContactScreen() {
     <ScreenTemplete
       title={title}
       action={contactFetchAction}
-      editHandler={editModalHandler}>
+      editHandler={editModalHandler}
+      isLoad={isContact}>
       <div className={style.contactScreen}>
         <p>{detail}</p>
         <a href={`mailto:${email}`}>{email}</a>

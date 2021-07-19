@@ -10,11 +10,13 @@ import ReduxThunk from 'redux-thunk';
 import ColorsReducer from './store/reducers/ColorsReducer';
 import AdminReducer from './store/reducers/AdminReducer';
 import MesssageReducer from './store/reducers/MessageReducer';
+import LoadReducer from './store/reducers/LoadReducer';
 
 const reducers = combineReducers({
   colors: ColorsReducer,
   admin: AdminReducer,
   message: MesssageReducer,
+  load: LoadReducer,
 });
 const store = createStore(reducers, applyMiddleware(ReduxThunk));
 

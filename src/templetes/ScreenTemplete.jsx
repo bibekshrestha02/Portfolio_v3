@@ -12,9 +12,10 @@ export default function ScreenTemplete({
   isCreateButton,
   createHandler,
   action,
+  isLoad,
 }) {
   const dispatch = useDispatch();
-  const [isLoading, setLoading] = useState(true);
+  const [isLoading, setLoading] = useState(false);
   const { isAdmin } = useSelector((state) => state.admin);
   const { screenBackground, text, primary } = useSelector(
     (state) => state.colors
@@ -59,8 +60,10 @@ export default function ScreenTemplete({
         console.log(error);
       }
     };
-    init();
-  }, [action, dispatch]);
+    if (!isLoad) {
+      init();
+    }
+  }, [action, dispatch, isLoad]);
 
   let data;
   if (isLoading) {

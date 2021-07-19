@@ -23,6 +23,7 @@ export default function AboutScreen() {
   const { title, subTitle, description, cvPath } = useSelector(
     (state) => state.admin.about
   );
+  const { isAbout } = useSelector((state) => state.load);
   const initalValue = {
     title: title ? title : '',
     subTitle: subTitle ? subTitle : '',
@@ -50,6 +51,7 @@ export default function AboutScreen() {
   return (
     <ScreenTemplete
       title={title}
+      isLoad={isAbout}
       editHandler={editModalHandler}
       action={aboutFetchAction}>
       <div className={style.aboutScreenContainer}>
