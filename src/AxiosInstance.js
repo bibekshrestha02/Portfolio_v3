@@ -1,7 +1,7 @@
 import axios from 'axios';
 let token = localStorage.getItem('token');
 const instance = axios.create({
-  baseURL: 'http://localhost:5000/api/v1',
+  baseURL: 'https://portfolio-backendv3.herokuapp.com/api/v1',
   timeout: 8000,
   headers: {
     'x-auth-token': token ? token : '',
