@@ -48,12 +48,15 @@ function App() {
       <MainTempletes>
         <Suspense fallback={<LoadingComponent />}>
           <Switch>
-            <Route exact path='/' component={AboutScreen} />
-            <Route path='/contacts' component={ContactScreen} />
-            <Route path='/educations' component={EducationScreen} />
-            <Route path='/projects' component={ProjectsScreen} />
-            <Route path='/skills' component={SkillScreen} />
-            <Route path='/login' component={LoginScreen} />
+            <Route exact path='/Portfolio_v3/' component={AboutScreen} />
+            <Route path='/Portfolio_v3/contacts' component={ContactScreen} />
+            <Route
+              path='/Portfolio_v3/educations'
+              component={EducationScreen}
+            />
+            <Route path='/Portfolio_v3/projects' component={ProjectsScreen} />
+            <Route path='/Portfolio_v3/skills' component={SkillScreen} />
+            <Route path='/Portfolio_v3/login' component={LoginScreen} />
             <Route path='*' component={AboutScreen} />
           </Switch>
         </Suspense>

@@ -99,27 +99,27 @@ export default function NavComponent() {
   const links = [
     {
       name: 'About',
-      path: '/',
+      path: '/Portfolio_v3/',
       icon: BsFillPersonFill,
     },
     {
       name: 'Education',
-      path: '/educations',
+      path: '/Portfolio_v3/educations',
       icon: BiBookAlt,
     },
     {
       name: 'Skills',
-      path: '/skills',
+      path: '/Portfolio_v3/skills',
       icon: BiCube,
     },
     {
       name: 'Projects',
-      path: '/projects',
+      path: '/Portfolio_v3/projects',
       icon: FaProjectDiagram,
     },
     {
       name: 'Contact',
-      path: '/contacts',
+      path: '/Portfolio_v3/contacts',
       icon: BiMessageRoundedDots,
     },
   ];
