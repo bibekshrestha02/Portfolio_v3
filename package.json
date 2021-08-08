@@ -1,7 +1,7 @@
 {
   "name": "portfolio_v3",
   "version": "0.1.0",
-  "homepage": "http://bibekshrestha02.github.io/",
+  "homepage": "https://bibekshrestha02.github.io/Portfolio_v3/",
   "private": true,
   "dependencies": {
     "@testing-library/jest-dom": "^5.14.1",
@@ -35,12 +35,12 @@
     "yup": "^0.32.9"
   },
   "scripts": {
+    "predeploy": "npm run build",
+    "deploy": "gh-pages -d build",
     "start": "react-scripts start",
     "build": "react-scripts build",
     "test": "react-scripts test",
-    "eject": "react-scripts eject",
-    "predeploy": "npm run build",
-    "deploy": "gh-pages -d build"
+    "eject": "react-scripts eject"
   },
   "eslintConfig": {
     "extends": [
