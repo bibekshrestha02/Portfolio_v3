@@ -13,7 +13,7 @@ export default function LoginScreen() {
     try {
       const { userID, accessToken } = response;
       await dispatch(login(userID, accessToken));
-      history.push('/');
+      history.push('/Portfolio_v3/');
     } catch (error) {
       dispatch(createMessageAction('Something went wrong!', 'error'));
     }
