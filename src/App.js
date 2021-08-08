@@ -1,6 +1,8 @@
 import React, { Suspense, lazy, useEffect, useState } from 'react';
 import MainTempletes from './templetes/MainTempletes';
 import LoadingComponent from './components/LoadingComponent';
+import MainNetworkErrorComponent from './components/MainNetworkErrorComponent';
+
 import { Route, Switch, BrowserRouter as Router } from 'react-router-dom';
 import { initalCheck } from './store/actions/authActions';
 import { initalFetchAction } from './store/actions/AdminActions';
@@ -14,7 +16,7 @@ const LoginScreen = lazy(() => import('./screens/LoginScreen'));
 function App() {
   const dispatch = useDispatch();
   const [isLoading, setLoading] = useState(true);
-
+  const [isError, setError] = useState(false);
   useEffect(() => {
     const init = async () => {
       try {
@@ -23,7 +25,8 @@ function App() {
         await dispatch(initalFetchAction());
         setLoading(false);
       } catch (error) {
-        console.log(error);
+        setError(true);
+        setLoading(false);
       }
     };
     init();
@@ -35,6 +38,9 @@ function App() {
         <LoadingComponent />
       </div>
     );
+  }
+  if (!isLoading && isError) {
+    return <MainNetworkErrorComponent />;
   }
   return (
     <Router>
