@@ -21,6 +21,7 @@ function App() {
     const init = async () => {
       try {
         setLoading(true);
+        setError(false);
         await dispatch(initalCheck());
         await dispatch(initalFetchAction());
         setLoading(false);
