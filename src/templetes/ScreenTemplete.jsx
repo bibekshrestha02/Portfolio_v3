@@ -3,7 +3,7 @@ import style from './style.module.scss';
 import { BiEdit } from 'react-icons/bi';
 import { IoMdAdd } from 'react-icons/io';
 import { useSelector, useDispatch } from 'react-redux';
-
+import PageErrorComponent from '../components/PageErrorComponent';
 import LoadingComponent from '../components/LoadingComponent';
 export default function ScreenTemplete({
   title,
@@ -16,6 +16,7 @@ export default function ScreenTemplete({
 }) {
   const dispatch = useDispatch();
   const [isLoading, setLoading] = useState(false);
+  const [isError, setError] = useState(false);
   const { isAdmin } = useSelector((state) => state.admin);
   const { screenBackground, text, primary } = useSelector(
     (state) => state.colors
@@ -53,11 +54,13 @@ export default function ScreenTemplete({
     }
     const init = async () => {
       try {
+        setError(false);
         setLoading(true);
         await dispatch(action());
         setLoading(false);
       } catch (error) {
-        console.log(error);
+        setLoading(false);
+        setError(true);
       }
     };
     if (!isLoad) {
@@ -68,6 +71,8 @@ export default function ScreenTemplete({
   let data;
   if (isLoading) {
     data = <LoadingComponent />;
+  } else if (!isLoading && isError) {
+    data = <PageErrorComponent />;
   } else {
     data = (
       <div className={style.component}>
