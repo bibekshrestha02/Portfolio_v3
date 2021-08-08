@@ -57,7 +57,12 @@ export default function AboutScreen() {
       <div className={style.aboutScreenContainer}>
         <p className={style.subTitle}>{subTitle}</p>
         <p className={style.description}>{description}</p>
-        <ButtonAssets title='Download My CV' />
+        <ButtonAssets
+          title='View My CV'
+          clickHandler={() => {
+            window.open(cvPath, '_blank');
+          }}
+        />
       </div>
       {isEditModel && (
         <ModelComponent
