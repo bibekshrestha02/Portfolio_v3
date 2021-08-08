@@ -4,6 +4,8 @@ import style from './style.module.scss';
 import { useDispatch } from 'react-redux';
 import { login } from '../store/actions/authActions';
 import { useHistory } from 'react-router-dom';
+import { createMessageAction } from '../store/actions/MessageActions';
+
 export default function LoginScreen() {
   const dispatch = useDispatch();
   const history = useHistory();
@@ -13,7 +15,7 @@ export default function LoginScreen() {
       await dispatch(login(userID, accessToken));
       history.push('/');
     } catch (error) {
-      console.log(error);
+      dispatch(createMessageAction('Something went wrong!', 'error'));
     }
   };
 

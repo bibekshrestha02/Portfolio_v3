@@ -45,7 +45,7 @@ export default function AboutScreen() {
     } catch (error) {
       setSubmitting(false);
       console.log(error);
-      dispatch(createMessageAction('Successfully Updated!', 'warning'));
+      dispatch(createMessageAction('Something went wrong!', 'error'));
     }
   };
   return (
